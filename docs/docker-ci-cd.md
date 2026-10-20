@@ -11,6 +11,16 @@ Sau khi khởi động, cổng khách hàng ở `http://localhost:3000`, cổng 
 
 Hai cổng frontend dùng cùng mã nguồn trong giai đoạn khởi tạo, nhưng được build với `NEXT_PUBLIC_PORTAL=customer` hoặc `NEXT_PUBLIC_PORTAL=admin`. Khi xây giao diện, dùng biến này để hiển thị cổng khách hàng hoặc dashboard quản trị; API backend vẫn chỉ công khai qua cổng `8080` trong môi trường phát triển.
 
+## Phát triển với hot reload
+
+Để sửa file frontend và xem thay đổi ngay khi lưu, chạy chế độ development thay vì image production:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+```
+
+`docker-compose.dev.yml` mount thư mục `ryokan-frontend` vào container và chạy Next.js development server. Lần đầu cần cài dependencies vào Docker volume; các lần sau chỉ cần chạy lại lệnh trên. Thay đổi trong `src/` hoặc Tailwind CSS sẽ tự refresh trên `http://localhost:3000` và `http://localhost:3001`.
+
 ## CI/CD trên GitHub Actions
 
 Workflow [ci-cd.yml](../.github/workflows/ci-cd.yml) thực hiện:

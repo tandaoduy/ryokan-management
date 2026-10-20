@@ -1,0 +1,29 @@
+import { DarkMode } from "./DarkMode";
+
+## DarkMode
+
+Nút chuyển giao diện sáng/tối, lưu lựa chọn vào `localStorage` và áp dụng class `dark` cho HTML.
+
+### Để làm gì
+
+- Cho phép khách hoặc nhân viên chọn giao diện phù hợp.
+- Duy trì lựa chọn sau khi tải lại trang.
+
+### Thiết lập
+
+```tsx
+<DarkModeProvider><DarkMode showLabel />{children}</DarkModeProvider>
+```
+
+### API
+
+| Prop | Type | Default | Mô tả |
+| --- | --- | --- | --- |
+| `showLabel` | `boolean` | `true` | Hiển thị nhãn Sáng/Tối. |
+| `className` | `string` | `''` | Tailwind class bổ sung. |
+
+### Hook
+
+```tsx
+const { theme, setTheme, toggleTheme } = useDarkMode();
+```

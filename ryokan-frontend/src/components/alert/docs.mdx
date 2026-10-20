@@ -2,7 +2,7 @@ import { Alert } from "./Alert";
 
 ## Alert
 
-Hiển thị thông báo theo trạng thái, với icon mặc định, tiêu đề và nội dung React tùy chỉnh.
+Hiển thị thông báo theo trạng thái, với halo icon, tiêu đề, badge, action, nội dung React tùy chỉnh và nút đóng.
 
 ### Để làm gì
 
@@ -25,16 +25,36 @@ Hiển thị thông báo theo trạng thái, với icon mặc định, tiêu đ�
 
 <Alert variant="info" title="Thông tin">Onsen riêng tư cần được đặt trước 30 phút.</Alert>
 
+#### Có badge và action
+
+```tsx
+<Alert
+  variant="warning"
+  title="Phòng sắp hết"
+  badge="Còn 1 phòng"
+  action={<button className="font-semibold text-amber-700">Xem phòng khác</button>}
+  align="start"
+>
+  Chỉ còn một phòng Washitsu phù hợp với lịch lưu trú.
+</Alert>
+```
+
 ### API
 
 | Prop | Type | Default | Mô tả |
 | --- | --- | --- | --- |
 | `variant` | `'success' \| 'error' \| 'warning' \| 'info'` | `'info'` | Trạng thái và màu thông báo. |
-| `title` | `string` | — | Tiêu đề alert. |
+| `title` | `ReactNode` | — | Tiêu đề alert. |
 | `children` | `ReactNode` | — | Nội dung dưới tiêu đề. |
+| `icon` | `ReactNode` | — | Ghi đè icon mặc định. Truyền `null` để ẩn icon. |
+| `badge` | `ReactNode` | — | Nhãn nhỏ bên cạnh tiêu đề. |
+| `action` | `ReactNode` | — | Vùng hành động bên dưới nội dung. |
+| `closable` | `boolean` | `true` | Hiển thị nút đóng alert. |
+| `align` | `'center' \| 'start'` | `'center'` | Canh icon theo giữa hoặc đầu nội dung. |
+| `onClose` | `() => void` | — | Gọi sau khi người dùng đóng alert. |
 | `className` | `string` | `''` | Tailwind class bổ sung. |
 
 ### Ghi chú
 
-- Icon và màu được chọn theo `variant`.
-- Alert hiện là tĩnh; mở rộng `AlertProvider` khi cần toast hoặc dismissible.
+- Icon, halo và màu viền được chọn theo `variant`.
+- Alert mặc định đóng được và tự ẩn sau khi người dùng bấm nút đóng.

@@ -6,39 +6,81 @@ import { TestPageLayout } from "../_components/TestPageLayout";
 export default function AlertTestPage() {
   return (
     <TestPageLayout
-      title="Alert"
-      description="Hiển thị thông báo theo phong cách hiện đại với halo icon, viền màu sắc và nút đóng."
+      title="Alert (旅館・和風スタイル)"
+      description="Component thông báo chuẩn phong cách Ryokan Nhật Bản: Bảng màu truyền thống Nippon, dấu triện Hanko, nẹp viền Tatami-heri và họa tiết phong cảnh Nhật Bản mộc mạc."
     >
-      <div className="space-y-8">
-        {/* 4 Trạng thái chuẩn */}
-        <section className="space-y-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
-            Các trạng thái thông báo
-          </h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Alert variant="success" title="Đặt phòng thành công">
-              Mã đặt phòng RSV-001 đã được gửi đến khách lưu trú.
-            </Alert>
-            <Alert variant="error" title="Thanh toán thất bại">
-              Vui lòng kiểm tra lại phương thức thanh toán của bạn.
-            </Alert>
-            <Alert variant="warning" title="Phòng sắp hết">
-              Chỉ còn 1 phòng Washitsu truyền thống cho ngày đã chọn.
-            </Alert>
-            <Alert variant="info" title="Thông tin onsen">
-              Onsen riêng tư cần được đặt trước 30 phút.
-            </Alert>
+      <div className="space-y-10">
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-500">
+              Các trạng thái thông báo Ryokan
+            </h2>
+            <span className="text-xs text-stone-400">Phong cách Wabi-sabi & Omotenashi</span>
           </div>
-        </section>
 
-        {/* Mẫu theo guideline mẫu */}
-        <section className="space-y-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
-            Mẫu tham chiếu (Guideline Do)
-          </h2>
-          <div className="max-w-xl">
-            <Alert variant="info" title="Password Expiring Soon">
-              Your password expires in 5 days. Update it in settings.
+          <div className="grid gap-4 md:grid-cols-2">
+            <Alert
+              variant="success"
+              title="Đặt phòng thành công"
+              action={
+                <button
+                  type="button"
+                  className="text-xs font-semibold text-[#245238] hover:underline"
+                  onClick={() => alert("Mở chi tiết đặt phòng")}
+                >
+                  Xem chi tiết lịch lưu trú →
+                </button>
+              }
+            >
+              Mã đặt phòng RSV-001 đã được xác nhận. Chúng tôi rất hân hạnh được đón tiếp quý khách.
+            </Alert>
+
+            <Alert
+              variant="error"
+              title="Thanh toán thất bại"
+              action={
+                <button
+                  type="button"
+                  className="rounded bg-[#A32E35] px-2.5 py-1 text-xs font-medium text-white shadow-xs hover:bg-[#8B1E22] transition"
+                  onClick={() => alert("Thử thanh toán lại")}
+                >
+                  Thử lại phương thức khác
+                </button>
+              }
+            >
+              Giao dịch qua thẻ bị gián đoạn. Vui lòng kiểm tra lại thông tin thẻ thanh toán của bạn.
+            </Alert>
+
+            <Alert
+              variant="warning"
+              title="Phòng sắp hết"
+              action={
+                <button
+                  type="button"
+                  className="text-xs font-semibold text-[#7A5005] hover:underline"
+                  onClick={() => alert("Giữ phòng nhanh")}
+                >
+                  Giữ phòng ngay →
+                </button>
+              }
+            >
+              Chỉ còn đúng 1 phòng Washitsu nhìn ra vườn thiền cho ngày đã chọn.
+            </Alert>
+
+            <Alert
+              variant="info"
+              title="Thông tin onsen"
+              action={
+                <button
+                  type="button"
+                  className="text-xs font-semibold text-[#1A4B72] hover:underline"
+                  onClick={() => alert("Xem lịch onsen")}
+                >
+                  Quy định tắm khoáng →
+                </button>
+              }
+            >
+              Bể onsen riêng tư cần được đặt trước 30 phút để chuẩn bị nước khoáng thiên nhiên nóng ấm.
             </Alert>
           </div>
         </section>
