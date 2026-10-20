@@ -7,7 +7,9 @@
 3. Đổi `POSTGRES_PASSWORD` trong `.env`.
 4. Chạy toàn bộ hệ thống: `docker compose up --build`.
 
-Sau khi khởi động, frontend ở `http://localhost:3000`, backend ở `http://localhost:8080` và PostgreSQL ở cổng `5433` phía máy chủ (`5432` bên trong Docker; các cổng có thể thay đổi trong `.env`). Dừng dịch vụ bằng `docker compose down`; thêm `-v` chỉ khi muốn xóa dữ liệu PostgreSQL cục bộ.
+Sau khi khởi động, cổng khách hàng ở `http://localhost:3000`, cổng quản trị ở `http://localhost:3001`, backend ở `http://localhost:8080` và PostgreSQL ở cổng `5433` phía máy chủ (`5432` bên trong Docker; các cổng có thể thay đổi trong `.env`). Dừng dịch vụ bằng `docker compose down`; thêm `-v` chỉ khi muốn xóa dữ liệu PostgreSQL cục bộ.
+
+Hai cổng frontend dùng cùng mã nguồn trong giai đoạn khởi tạo, nhưng được build với `NEXT_PUBLIC_PORTAL=customer` hoặc `NEXT_PUBLIC_PORTAL=admin`. Khi xây giao diện, dùng biến này để hiển thị cổng khách hàng hoặc dashboard quản trị; API backend vẫn chỉ công khai qua cổng `8080` trong môi trường phát triển.
 
 ## CI/CD trên GitHub Actions
 

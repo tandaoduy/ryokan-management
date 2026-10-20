@@ -33,15 +33,32 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
-  frontend:
+  frontend-customer:
     build:
       context: ./ryokan-frontend
       args:
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+        NEXT_PUBLIC_PORTAL: customer
     environment:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+      NEXT_PUBLIC_PORTAL: customer
     ports:
-      - "${FRONTEND_PORT:-3000}:3000"
+      - "${CUSTOMER_PORT:-3000}:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  frontend-admin:
+    build:
+      context: ./ryokan-frontend
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+        NEXT_PUBLIC_PORTAL: admin
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+      NEXT_PUBLIC_PORTAL: admin
+    ports:
+      - "${ADMIN_PORT:-3001}:3000"
     depends_on:
       - backend
     restart: unless-stopped

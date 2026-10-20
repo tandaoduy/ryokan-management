@@ -1,0 +1,40 @@
+import { Alert } from "./Alert";
+
+## Alert
+
+Hiển thị thông báo theo trạng thái, với icon mặc định, tiêu đề và nội dung React tùy chỉnh.
+
+### Để làm gì
+
+- Thông báo kết quả thao tác: thành công, lỗi, cảnh báo hoặc thông tin.
+- Làm nổi bật nội dung khách hoặc nhân viên cần chú ý.
+
+### Khi nào sử dụng
+
+- Sau khi tạo đặt phòng, thanh toán hoặc hủy lịch onsen.
+- Khi phòng sắp hết, dữ liệu không hợp lệ hoặc lịch phục vụ thay đổi.
+
+### Demos
+
+```tsx
+<Alert variant="info" title="Thông tin">Onsen riêng tư cần được đặt trước 30 phút.</Alert>
+<Alert variant="success" title="Đặt phòng thành công">Mã RSV-001 đã được gửi đến khách.</Alert>
+<Alert variant="warning" title="Phòng sắp hết">Chỉ còn một phòng phù hợp.</Alert>
+<Alert variant="error" title="Thanh toán thất bại">Vui lòng thử lại.</Alert>
+```
+
+<Alert variant="info" title="Thông tin">Onsen riêng tư cần được đặt trước 30 phút.</Alert>
+
+### API
+
+| Prop | Type | Default | Mô tả |
+| --- | --- | --- | --- |
+| `variant` | `'success' \| 'error' \| 'warning' \| 'info'` | `'info'` | Trạng thái và màu thông báo. |
+| `title` | `string` | — | Tiêu đề alert. |
+| `children` | `ReactNode` | — | Nội dung dưới tiêu đề. |
+| `className` | `string` | `''` | Tailwind class bổ sung. |
+
+### Ghi chú
+
+- Icon và màu được chọn theo `variant`.
+- Alert hiện là tĩnh; mở rộng `AlertProvider` khi cần toast hoặc dismissible.

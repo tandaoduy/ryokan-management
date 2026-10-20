@@ -1,0 +1,47 @@
+import { Modal } from "./Modal";
+
+## Modal
+
+Hộp thoại phủ trên nội dung trang, dùng cho xác nhận hoặc tác vụ cần người dùng tập trung xử lý.
+
+### Để làm gì
+
+- Xác nhận hủy đặt phòng, check-out hoặc hoàn tiền.
+- Hiển thị form ngắn mà không phải rời màn hình hiện tại.
+
+### Khi nào sử dụng
+
+- Khi thao tác làm thay đổi dữ liệu hoặc khó hoàn tác.
+- Khi form chỉ có ít trường và liên quan trực tiếp đến nội dung đang xem.
+
+### Demos
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<Modal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Xác nhận hủy đặt phòng"
+  size="md"
+  footer={<button onClick={() => setOpen(false)}>Xác nhận</button>}
+>
+  Bạn có chắc muốn hủy đặt phòng RSV-001?
+</Modal>
+```
+
+### API
+
+| Prop | Type | Default | Mô tả |
+| --- | --- | --- | --- |
+| `open` | `boolean` | — | Quyết định modal có hiển thị không. |
+| `onClose` | `() => void` | — | Click nền, nút đóng hoặc Escape sẽ gọi hàm này. |
+| `title` | `string` | — | Tiêu đề modal. |
+| `children` | `ReactNode` | — | Nội dung thân modal. |
+| `footer` | `ReactNode` | — | Vùng hành động dưới cùng. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Độ rộng modal. |
+
+### Ghi chú
+
+- Modal có `role="dialog"` và `aria-modal="true"`.
+- Không xếp chồng nhiều modal; dùng trang riêng cho form dài.

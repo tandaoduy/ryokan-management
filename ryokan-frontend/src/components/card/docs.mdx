@@ -1,0 +1,41 @@
+import { Card } from "./Card";
+
+## Card
+
+Khung nội dung thống nhất cho dashboard, thông tin phòng, gói nghỉ dưỡng và biểu mẫu nhỏ.
+
+### Để làm gì
+
+- Nhóm nội dung liên quan vào một vùng dễ nhận biết.
+- Tạo bố cục nhất quán với border, bo góc và đổ bóng nhẹ.
+
+### Khi nào sử dụng
+
+- Hiển thị chỉ số: phòng sẵn sàng, doanh thu ngày hoặc lượt onsen.
+- Hiển thị tóm tắt phòng, đặt phòng, Kaiseki hoặc form cấu hình.
+
+### Demos
+
+```tsx
+<Card title="Phòng sẵn sàng" description="Cập nhật lúc 10:30" actions={<button>Xem chi tiết</button>}>
+  <p className="text-3xl font-bold">12</p>
+  <p>phòng có thể nhận khách hôm nay</p>
+</Card>
+
+<Card><p>Nội dung hoàn toàn tùy biến.</p></Card>
+```
+
+### API
+
+| Prop | Type | Default | Mô tả |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | — | Nội dung card. |
+| `title` | `string` | — | Tiêu đề header. |
+| `description` | `string` | — | Mô tả dưới tiêu đề. |
+| `actions` | `ReactNode` | — | Nút hoặc nhóm hành động ở góc phải. |
+| `className` | `string` | `''` | Tailwind class bổ sung. |
+
+### Ghi chú
+
+- Header chỉ hiện khi có `title`, `description` hoặc `actions`.
+- Không lồng card nếu không cần thiết về mặt cấu trúc nội dung.

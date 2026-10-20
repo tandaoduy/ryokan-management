@@ -1,0 +1,52 @@
+import { Table } from "./Table";
+
+## Table
+
+Bảng generic, nhận kiểu dữ liệu, cấu hình cột render và hàm tạo khóa duy nhất cho từng dòng.
+
+### Để làm gì
+
+- Hiển thị danh sách đặt phòng, phòng, khách lưu trú, nhân viên hoặc hóa đơn.
+- Giữ bố cục header, dòng dữ liệu, hover state và empty state nhất quán.
+
+### Khi nào sử dụng
+
+- Khi người dùng cần so sánh nhiều bản ghi theo cột.
+- Khi dữ liệu có từ ba trường trở lên và cần quét nhanh.
+
+### Demos
+
+```tsx
+type Room = { id: string; number: string; status: string };
+
+const columns: TableColumn<Room>[] = [
+  { key: "number", header: "Phòng", render: (room) => room.number },
+  { key: "status", header: "Trạng thái", render: (room) => room.status },
+];
+
+<Table columns={columns} data={rooms} getRowKey={(room) => room.id} emptyMessage="Chưa có phòng phù hợp." />
+```
+
+### API
+
+| Prop | Type | Default | Mô tả |
+| --- | --- | --- | --- |
+| `columns` | `TableColumn<T>[]` | — | Cấu hình cột và hàm render cell. |
+| `data` | `T[]` | — | Danh sách dòng dữ liệu. |
+| `getRowKey` | `(row: T) => string` | — | Tạo React key duy nhất cho mỗi dòng. |
+| `emptyMessage` | `string` | `'Chưa có dữ liệu.'` | Nội dung khi `data` rỗng. |
+| `className` | `string` | `''` | Tailwind class bổ sung cho wrapper. |
+
+### `TableColumn<T>`
+
+| Field | Type | Mô tả |
+| --- | --- | --- |
+| `key` | `string` | Khóa duy nhất của cột. |
+| `header` | `string` | Nội dung tiêu đề cột. |
+| `render` | `(row: T) => ReactNode` | Hàm render dữ liệu cell. |
+| `className` | `string` | Class cho header và cell của cột. |
+
+### Ghi chú
+
+- Table tự bọc `overflow-x-auto` để không vỡ giao diện trên mobile.
+- Pagination, sorting và selection sẽ được thêm khi mở rộng component.
