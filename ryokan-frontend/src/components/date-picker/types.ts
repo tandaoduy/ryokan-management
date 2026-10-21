@@ -1,0 +1,1 @@
+export type DatePickerProps = { label?: string; value?: string; defaultValue?: string; onChange?: (value: string) => void; min?: string; max?: string; variant?: "default" | "filled" | "underline"; className?: string; placeholder?: string };

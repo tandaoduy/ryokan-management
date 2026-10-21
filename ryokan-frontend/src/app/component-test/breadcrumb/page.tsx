@@ -1,0 +1,3 @@
+import { Breadcrumb, Card } from "../../../components"; import { TestPageLayout } from "../_components/TestPageLayout";
+const items = [{ label: "Trang chủ", href: "/" }, { label: "Đặt phòng", href: "/reservations" }, { label: "RSV-001" }];
+export default function Page() { return <TestPageLayout title="Breadcrumb" description="Điều hướng theo cấp bậc với dạng tiêu chuẩn, gọn và pill surface."><div className="flex flex-col gap-6"><Card title="Default"><Breadcrumb items={items} /></Card><Card title="Compact"><Breadcrumb items={items} variant="compact" /></Card><Card title="Pill"><Breadcrumb items={items} variant="pill" /></Card></div></TestPageLayout>; }

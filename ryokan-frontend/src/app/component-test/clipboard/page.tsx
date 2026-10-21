@@ -1,0 +1,2 @@
+import { Clipboard, Card } from "../../../components"; import { TestPageLayout } from "../_components/TestPageLayout";
+export default function Page() { return <TestPageLayout title="Clipboard" description="Sao chép mã, liên kết hoặc nội dung ngắn."><Card title="Các biến thể"><div className="flex flex-wrap items-center gap-4"><Clipboard value="RSV-2026-001" label="Sao chép mã đặt phòng" /><Clipboard value="RSV-2026-001" variant="outline" /><Clipboard value="RSV-2026-001" variant="ghost" /></div></Card></TestPageLayout>; }
