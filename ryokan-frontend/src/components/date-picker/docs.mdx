@@ -1,9 +1,20 @@
 ## Date picker
 
-Trường chọn ngày native, hỗ trợ controlled/uncontrolled value, giới hạn `min` và `max`.
+Component chọn ngày tùy chỉnh cao cấp với popup lịch tương tác, hỗ trợ controlled/uncontrolled value, giới hạn `min` / `max`, chuyển đổi nhanh tháng và năm, cùng phím tắt "Hôm nay" và "Xóa".
 
 ```tsx
-<DatePicker label="Check-in" min="2026-10-01" variant="filled" />
+<DatePicker label="Check-in" defaultValue="2026-10-21" min="2026-10-01" />
+<DatePicker label="Check-out" variant="filled" placeholder="Chọn ngày trả phòng" />
+<DatePicker label="Dịch vụ" variant="underline" />
 ```
 
-`variant`: `default` hoặc `filled`.
+### Props
+
+- `label`: Nhãn hiển thị phía trên ô nhập.
+- `value`: Giá trị ngày (chuỗi `YYYY-MM-DD`, chế độ controlled).
+- `defaultValue`: Giá trị ngày mặc định (chế độ uncontrolled).
+- `onChange`: Callback khi chọn hoặc xóa ngày (`(value: string) => void`).
+- `min` / `max`: Giới hạn khoảng ngày được phép chọn.
+- `variant`: `default` (viền thẻ bo tròn), `filled` (nền xám nhẹ), `underline` (đường kẻ dưới tinh tế).
+- `placeholder`: Dòng chữ gợi ý khi chưa chọn ngày (mặc định: "Chọn ngày").
+

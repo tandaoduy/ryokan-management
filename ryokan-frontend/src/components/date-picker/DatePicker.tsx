@@ -82,31 +82,31 @@ export function DatePicker({
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Set today's date after hydration to avoid SSR prerender error
-  useEffect(() => {
-    const now = new Date();
-    const str = formatDateString(now.getFullYear(), now.getMonth(), now.getDate());
-    setTodayStr(str);
+  const handleToggle = () => {
+    if (!isOpen) {
+      const now = new Date();
+      const str = formatDateString(now.getFullYear(), now.getMonth(), now.getDate());
+      setTodayStr(str);
 
-    if (!currentValue) {
-      setViewYear(now.getFullYear());
-      setViewMonth(now.getMonth());
-    }
-  }, []);
-
-  // Sync view when currentValue changes
-  useEffect(() => {
-    if (currentValue) {
       const parsed = parseDateString(currentValue);
       if (parsed) {
         setViewYear(parsed.year);
         setViewMonth(parsed.month);
+      } else {
+        setViewYear(now.getFullYear());
+        setViewMonth(now.getMonth());
       }
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+      setViewMode("days");
     }
-  }, [currentValue]);
+  };
 
   // Click outside and escape key handling
   useEffect(() => {
+    if (!isOpen) return;
+
     function handleClickOutside(event: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsOpen(false);
@@ -120,10 +120,8 @@ export function DatePicker({
       }
     }
 
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("keydown", handleKeyDown);
-    }
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
@@ -262,11 +260,11 @@ export function DatePicker({
       <div
         role="button"
         tabIndex={0}
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={handleToggle}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            setIsOpen((prev) => !prev);
+            handleToggle();
           }
         }}
         className={`group flex w-full cursor-pointer items-center justify-between rounded-xl border px-3.5 py-2.5 text-sm transition outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 ${
