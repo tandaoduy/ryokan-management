@@ -2,11 +2,11 @@ import { Loading } from "./Loading";
 
 ## Loading
 
-Spinner biểu thị tác vụ đang xử lý hoặc dữ liệu đang tải.
+Biểu tượng tải là vòng tròn gồm 8 dấu chấm sáng mờ tuần tự, biểu thị tác vụ đang xử lý hoặc dữ liệu đang tải.
 
 ### Để làm gì
 
-- Cho người dùng biết hệ thống đang phản hồi, tránh thao tác lặp.
+- Cho người dùng biết hệ thống đang phản hồi mà không chiếm nhiều không gian.
 - Dùng trong vùng fetch dữ liệu, nút submit hoặc bước đồng bộ.
 
 ### Khi nào sử dụng
@@ -20,17 +20,21 @@ Spinner biểu thị tác vụ đang xử lý hoặc dữ liệu đang tải.
 <Loading size="sm" label="Đang tải..." />
 <Loading size="md" label="Đang đồng bộ dữ liệu..." />
 <Loading size="lg" label="Đang tạo báo cáo..." />
+<Loading size="md" layout="vertical" label="Đang chuẩn bị phòng..." />
 ```
 
 ### API
 
 | Prop | Type | Default | Mô tả |
 | --- | --- | --- | --- |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Kích thước spinner. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Kích thước vòng tròn dấu chấm. |
+| `layout` | `'horizontal' \| 'vertical'` | `'horizontal'` | Bố cục ngang (cạnh nhãn) hoặc dọc (trên nhãn). |
 | `label` | `string` | `'Đang tải...'` | Nhãn hiển thị và hỗ trợ screen reader. |
 | `className` | `string` | `''` | Tailwind class bổ sung. |
 
 ### Ghi chú
 
-- Component có `role="status"` để hỗ trợ công cụ đọc màn hình.
+- Component có `role="status"` và `aria-live="polite"` để hỗ trợ công cụ đọc màn hình.
+- Vòng tròn đứng yên; 8 dấu chấm sáng mờ tuần tự theo chiều kim đồng hồ.
+- Chuyển động tự tắt theo thiết lập `prefers-reduced-motion` của người dùng.
 - Chỉ dùng khi tác vụ có độ trễ dễ nhận thấy.

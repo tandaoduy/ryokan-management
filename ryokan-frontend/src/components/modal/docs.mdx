@@ -24,6 +24,8 @@ const [open, setOpen] = useState(false);
   onClose={() => setOpen(false)}
   title="Xác nhận hủy đặt phòng"
   size="md"
+  variant="reservation"
+  theme="light"
   footer={<button onClick={() => setOpen(false)}>Xác nhận</button>}
 >
   Bạn có chắc muốn hủy đặt phòng RSV-001?
@@ -40,6 +42,8 @@ const [open, setOpen] = useState(false);
 | `children` | `ReactNode` | — | Nội dung thân modal. |
 | `footer` | `ReactNode` | — | Vùng hành động dưới cùng. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Độ rộng modal. |
+| `variant` | `'reservation' \| 'welcome' \| 'onsen'` | `'reservation'` | Màu nhấn và dấu ấn theo ngữ cảnh ryokan. |
+| `theme` | `'light' \| 'dark'` | `'dark'` | Bảng màu của modal. |
 
 ### Ghi chú
 
