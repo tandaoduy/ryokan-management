@@ -7,7 +7,7 @@ Bảng generic, nhận kiểu dữ liệu, cấu hình cột render và hàm t�
 ### Để làm gì
 
 - Hiển thị danh sách đặt phòng, phòng, khách lưu trú, nhân viên hoặc hóa đơn.
-- Giữ bố cục header, dòng dữ liệu, hover state và empty state nhất quán.
+- Giữ header, dòng dữ liệu, hover state và empty state rõ nét, nhất quán ở cả light/dark mode.
 
 ### Khi nào sử dụng
 
@@ -24,7 +24,9 @@ const columns: TableColumn<Room>[] = [
   { key: "status", header: "Trạng thái", render: (room) => room.status },
 ];
 
-<Table columns={columns} data={rooms} getRowKey={(room) => room.id} emptyMessage="Chưa có phòng phù hợp." />
+<Table columns={columns} data={rooms} getRowKey={(room) => room.id} />
+<Table columns={columns} data={rooms} getRowKey={(room) => room.id} variant="striped" />
+<Table columns={columns} data={rooms} getRowKey={(room) => room.id} variant="minimal" density="compact" />
 ```
 
 ### API
@@ -35,6 +37,8 @@ const columns: TableColumn<Room>[] = [
 | `data` | `T[]` | — | Danh sách dòng dữ liệu. |
 | `getRowKey` | `(row: T) => string` | — | Tạo React key duy nhất cho mỗi dòng. |
 | `emptyMessage` | `string` | `'Chưa có dữ liệu.'` | Nội dung khi `data` rỗng. |
+| `variant` | `'grid' \| 'striped' \| 'minimal'` | `'grid'` | Kiểu hiển thị bảng. |
+| `density` | `'compact' \| 'comfortable'` | `'comfortable'` | Mật độ khoảng cách trong ô. |
 | `className` | `string` | `''` | Tailwind class bổ sung cho wrapper. |
 
 ### `TableColumn<T>`
@@ -49,4 +53,6 @@ const columns: TableColumn<Room>[] = [
 ### Ghi chú
 
 - Table tự bọc `overflow-x-auto` để không vỡ giao diện trên mobile.
+- `grid` có đường kẻ giữa từng cột và hàng; đây là lựa chọn mặc định cho dữ liệu cần đối chiếu chính xác.
+- `striped` dùng hàng xen kẽ, còn `minimal` giảm bớt đường nét cho nội dung phụ.
 - Pagination, sorting và selection sẽ được thêm khi mở rộng component.
