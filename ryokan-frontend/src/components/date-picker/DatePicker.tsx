@@ -39,6 +39,25 @@ function formatDisplayDate(dateStr: string): string {
   return `${padZero(parsed.day)}/${padZero(parsed.month + 1)}/${parsed.year}`;
 }
 
+function isLeapYear(year: number): boolean {
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+}
+
+function getDaysInMonth(year: number, month: number): number {
+  const normalizedMonth = ((month % 12) + 12) % 12;
+  const days = [31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  return days[normalizedMonth];
+}
+
+function getFirstDayOfWeek(year: number, month: number): number {
+  // Sakamoto's algorithm: 0 = Mon, ..., 6 = Sun
+  const t = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
+  let y = year;
+  if (month < 2) y -= 1;
+  const sunBased = (y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) + t[month] + 1) % 7;
+  return (sunBased + 6) % 7;
+}
+
 export function DatePicker({
   label,
   value,
@@ -53,18 +72,27 @@ export function DatePicker({
   const [internalValue, setInternalValue] = useState(defaultValue);
   const currentValue = value !== undefined ? value : internalValue;
 
-  const initialParsed = parseDateString(currentValue) || {
-    year: new Date().getFullYear(),
-    month: new Date().getMonth(),
-    day: new Date().getDate(),
-  };
+  const initialParsed = parseDateString(currentValue);
 
-  const [viewYear, setViewYear] = useState(initialParsed.year);
-  const [viewMonth, setViewMonth] = useState(initialParsed.month);
+  const [viewYear, setViewYear] = useState(initialParsed?.year ?? 2026);
+  const [viewMonth, setViewMonth] = useState(initialParsed?.month ?? 9);
+  const [todayStr, setTodayStr] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"days" | "months" | "years">("days");
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Set today's date after hydration to avoid SSR prerender error
+  useEffect(() => {
+    const now = new Date();
+    const str = formatDateString(now.getFullYear(), now.getMonth(), now.getDate());
+    setTodayStr(str);
+
+    if (!currentValue) {
+      setViewYear(now.getFullYear());
+      setViewMonth(now.getMonth());
+    }
+  }, []);
 
   // Sync view when currentValue changes
   useEffect(() => {
@@ -77,7 +105,7 @@ export function DatePicker({
     }
   }, [currentValue]);
 
-  // Click outside to close
+  // Click outside and escape key handling
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -102,9 +130,6 @@ export function DatePicker({
     };
   }, [isOpen]);
 
-  const today = new Date();
-  const todayStr = formatDateString(today.getFullYear(), today.getMonth(), today.getDate());
-
   const handleSelectDate = (dateStr: string) => {
     if (isDateDisabled(dateStr)) return;
     if (value === undefined) {
@@ -124,7 +149,11 @@ export function DatePicker({
   };
 
   const handleToday = () => {
-    handleSelectDate(todayStr);
+    const now = new Date();
+    const str = formatDateString(now.getFullYear(), now.getMonth(), now.getDate());
+    setViewYear(now.getFullYear());
+    setViewMonth(now.getMonth());
+    handleSelectDate(str);
   };
 
   const isDateDisabled = (dateStr: string) => {
@@ -151,11 +180,12 @@ export function DatePicker({
     }
   };
 
-  // Generate calendar days (Monday-first)
-  const firstDayOfMonth = new Date(viewYear, viewMonth, 1);
-  const startingDayOfWeek = (firstDayOfMonth.getDay() + 6) % 7; // 0 for Mon, 6 for Sun
-  const daysInCurrentMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-  const daysInPrevMonth = new Date(viewYear, viewMonth, 0).getDate();
+  // Pure deterministic calendar days calculation
+  const startingDayOfWeek = getFirstDayOfWeek(viewYear, viewMonth);
+  const daysInCurrentMonth = getDaysInMonth(viewYear, viewMonth);
+  const prevMonthIndex = viewMonth === 0 ? 11 : viewMonth - 1;
+  const prevMonthYear = viewMonth === 0 ? viewYear - 1 : viewYear;
+  const daysInPrevMonth = getDaysInMonth(prevMonthYear, prevMonthIndex);
 
   const calendarDays: Array<{
     day: number;
@@ -166,48 +196,46 @@ export function DatePicker({
     isWeekend: boolean;
   }> = [];
 
-  // Previous month trailing days
+  // Trailing days from previous month
   for (let i = startingDayOfWeek - 1; i >= 0; i--) {
     const day = daysInPrevMonth - i;
-    const m = viewMonth === 0 ? 11 : viewMonth - 1;
-    const y = viewMonth === 0 ? viewYear - 1 : viewYear;
-    const dayOfWeek = (calendarDays.length) % 7;
+    const dayIndex = calendarDays.length % 7;
     calendarDays.push({
       day,
-      month: m,
-      year: y,
-      dateStr: formatDateString(y, m, day),
+      month: prevMonthIndex,
+      year: prevMonthYear,
+      dateStr: formatDateString(prevMonthYear, prevMonthIndex, day),
       isCurrentMonth: false,
-      isWeekend: dayOfWeek === 5 || dayOfWeek === 6,
+      isWeekend: dayIndex === 5 || dayIndex === 6,
     });
   }
 
-  // Current month days
+  // Days of current month
   for (let day = 1; day <= daysInCurrentMonth; day++) {
-    const dayOfWeek = (calendarDays.length) % 7;
+    const dayIndex = calendarDays.length % 7;
     calendarDays.push({
       day,
       month: viewMonth,
       year: viewYear,
       dateStr: formatDateString(viewYear, viewMonth, day),
       isCurrentMonth: true,
-      isWeekend: dayOfWeek === 5 || dayOfWeek === 6,
+      isWeekend: dayIndex === 5 || dayIndex === 6,
     });
   }
 
-  // Next month leading days to complete 42 cells (6 rows)
+  // Leading days of next month (complete 42 cells)
   const remainingCells = 42 - calendarDays.length;
+  const nextMonthIndex = viewMonth === 11 ? 0 : viewMonth + 1;
+  const nextMonthYear = viewMonth === 11 ? viewYear + 1 : viewYear;
   for (let day = 1; day <= remainingCells; day++) {
-    const m = viewMonth === 11 ? 0 : viewMonth + 1;
-    const y = viewMonth === 11 ? viewYear + 1 : viewYear;
-    const dayOfWeek = (calendarDays.length) % 7;
+    const dayIndex = calendarDays.length % 7;
     calendarDays.push({
       day,
-      month: m,
-      year: y,
-      dateStr: formatDateString(y, m, day),
+      month: nextMonthIndex,
+      year: nextMonthYear,
+      dateStr: formatDateString(nextMonthYear, nextMonthIndex, day),
       isCurrentMonth: false,
-      isWeekend: dayOfWeek === 5 || dayOfWeek === 6,
+      isWeekend: dayIndex === 5 || dayIndex === 6,
     });
   }
 
@@ -218,7 +246,7 @@ export function DatePicker({
       ? "rounded-none border-x-0 border-t-0 border-slate-300 bg-transparent px-0 hover:border-slate-400 dark:border-slate-600 dark:hover:border-slate-500"
       : "border-slate-300 bg-white hover:border-slate-400 dark:border-slate-600 dark:bg-slate-900 dark:hover:border-slate-500 shadow-sm shadow-slate-950/5";
 
-  // Years for year picker (12 years)
+  // Years for year picker (12-year window)
   const yearStart = Math.floor(viewYear / 12) * 12;
   const yearOptions = Array.from({ length: 12 }, (_, i) => yearStart + i);
 
