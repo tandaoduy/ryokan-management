@@ -1,0 +1,32 @@
+import { Badge } from "./Badge";
+
+## Badge
+
+Badge là nhãn ngắn, gọn để biểu thị trạng thái, phân loại hoặc số lượng. Component hỗ trợ màu semantic và ba kiểu trình bày, phù hợp với cả light/dark mode.
+
+### Khi sử dụng
+
+- Trạng thái đặt phòng, thanh toán hoặc tình trạng phòng.
+- Phân loại khách, gói dịch vụ hoặc nhãn ưu tiên.
+
+### Ví dụ
+
+```tsx
+<Badge variant="success">Đã xác nhận</Badge>
+<Badge variant="warning" appearance="outline">Chờ thanh toán</Badge>
+<Badge variant="danger" appearance="solid">Đã hủy</Badge>
+```
+
+### API
+
+| Prop | Type | Default | Mô tả |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | — | Nội dung ngắn của nhãn. |
+| `variant` | `'neutral' \| 'info' \| 'success' \| 'warning' \| 'danger'` | `'neutral'` | Ý nghĩa và màu trạng thái. |
+| `appearance` | `'soft' \| 'solid' \| 'outline'` | `'soft'` | Cách thể hiện nền/viền. |
+| `className` | `string` | `''` | Class Tailwind bổ sung. |
+
+### Ghi chú
+
+- `soft` là lựa chọn mặc định cho danh sách và bảng dữ liệu.
+- Dùng `solid` cho thông tin cần nhấn mạnh, còn `outline` cho nội dung phụ.

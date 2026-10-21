@@ -1,0 +1,6 @@
+import { Banner } from "../../../components";
+import { TestPageLayout } from "../_components/TestPageLayout";
+
+export default function BannerTestPage() {
+  return <TestPageLayout title="Banner" description="Khối nội dung nổi bật cho ưu đãi, gói dịch vụ và lời kêu gọi hành động."><div className="flex flex-col gap-6"><Banner eyebrow="Ưu đãi theo mùa" variant="brand" title="Trải nghiệm mùa hoa anh đào" action={<button className="rounded-lg bg-white px-4 py-2 text-sm font-bold text-indigo-700">Khám phá ngay</button>}>Ưu đãi nghỉ dưỡng 2 đêm, kèm bữa sáng Kaiseki và một lượt onsen riêng tư.</Banner><div className="grid gap-6 lg:grid-cols-2"><Banner eyebrow="Wellness" variant="forest" title="Onsen riêng tư">Tận hưởng không gian ngâm mình yên tĩnh, dành riêng cho bạn.</Banner><Banner eyebrow="Ẩm thực" variant="sunrise" title="Kaiseki mùa thu">Thực đơn từ nguyên liệu địa phương tươi ngon mỗi ngày.</Banner></div><Banner eyebrow="Thành viên Ryokan" variant="night" title="Quyền lợi dành cho khách thân thiết" action={<button className="rounded-lg border border-slate-500 px-4 py-2 text-sm font-bold">Xem đặc quyền</button>}>Tích điểm cho mỗi kỳ nghỉ và nhận ưu đãi độc quyền quanh năm.</Banner></div></TestPageLayout>;
+}

@@ -23,6 +23,10 @@ Khung nội dung thống nhất cho dashboard, thông tin phòng, gói nghỉ d�
 </Card>
 
 <Card><p>Nội dung hoàn toàn tùy biến.</p></Card>
+
+<Card variant="interactive" title="Đặt phòng mới">
+  Nội dung có thể click hoặc mở chi tiết.
+</Card>
 ```
 
 ### API
@@ -33,10 +37,12 @@ Khung nội dung thống nhất cho dashboard, thông tin phòng, gói nghỉ d�
 | `title` | `string` | — | Tiêu đề header. |
 | `description` | `string` | — | Mô tả dưới tiêu đề. |
 | `actions` | `ReactNode` | — | Nút hoặc nhóm hành động ở góc phải. |
+| `variant` | `'default' \| 'elevated' \| 'outlined' \| 'filled' \| 'interactive'` | `'default'` | Kiểu bề mặt và tương tác của card. |
 | `className` | `string` | `''` | Tailwind class bổ sung. |
 
 ### Ghi chú
 
 - Header chỉ hiện khi có `title`, `description` hoặc `actions`.
+- `default` dùng cho nội dung thông thường; `elevated` cho điểm nhấn; `outlined` và `filled` cho vùng nội dung phụ; `interactive` dành cho card có thể mở hoặc click.
 - Dark mode dùng nền slate-900 tách nhẹ khỏi nền trang slate-950, viền slate-700 trong suốt và bóng đổ sâu hơn.
 - Không lồng card nếu không cần thiết về mặt cấu trúc nội dung.

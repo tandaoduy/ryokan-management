@@ -1,0 +1,41 @@
+import { Carousel } from "./Carousel";
+
+## Carousel
+
+Carousel trình chiếu các React node theo từng slide, có nút lùi/tiến và chấm chỉ mục. Component có ba phong cách riêng cho hero promotion, nội dung dịch vụ và nhận xét ngắn.
+
+### Khi sử dụng
+
+- Giới thiệu gói nghỉ dưỡng, dịch vụ theo mùa hoặc các thông báo nổi bật.
+- Trình bày bộ ảnh phòng khi số lượng ít và người dùng cần xem lần lượt.
+
+### Ví dụ
+
+```tsx
+const slides = [
+  <Promo key="spring" title="Mùa hoa anh đào" />,
+  <Promo key="autumn" title="Kaiseki mùa thu" />,
+];
+
+<Carousel items={slides} />
+<Carousel items={slides} variant="hero" size="lg" />
+<Carousel items={slides} variant="minimal" showControls={false} initialSlide={1} />
+```
+
+### API
+
+| Prop | Type | Default | Mô tả |
+| --- | --- | --- | --- |
+| `items` | `ReactNode[]` | — | Danh sách slide cần hiển thị. |
+| `initialSlide` | `number` | `0` | Slide mở đầu; giá trị được giới hạn trong số slide có sẵn. |
+| `showControls` | `boolean` | `true` | Hiển thị nút lùi/tiến. |
+| `showIndicators` | `boolean` | `true` | Hiển thị chấm chỉ mục. |
+| `variant` | `'hero' \| 'card' \| 'minimal'` | `'card'` | Phong cách khung và điều hướng. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Kích thước chữ cơ sở. |
+| `className` | `string` | `''` | Class Tailwind bổ sung cho carousel. |
+
+### Ghi chú
+
+- Mỗi phần tử trong `items` nên có `key` ổn định nếu được tạo từ danh sách.
+- `hero` phù hợp ưu đãi lớn, `card` dùng cho phòng/gói dịch vụ, `minimal` dành cho quote và cập nhật ngắn.
+- Giữ số lượng slide vừa phải; carousel không phù hợp để che giấu nhiều nội dung quan trọng.

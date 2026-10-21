@@ -1,0 +1,34 @@
+import { Banner } from "./Banner";
+
+## Banner
+
+Banner là khối nội dung nổi bật trong layout, dùng để giới thiệu ưu đãi, dịch vụ hoặc lời kêu gọi hành động. Đây không phải Alert và không dùng để báo lỗi hay trạng thái hệ thống.
+
+### Khi sử dụng
+
+- Giới thiệu ưu đãi theo mùa, gói nghỉ dưỡng hoặc dịch vụ mới.
+- Làm nổi bật chương trình thành viên hoặc một lời kêu gọi hành động.
+
+### Ví dụ
+
+```tsx
+<Banner eyebrow="Ưu đãi theo mùa" variant="brand" title="Trải nghiệm mùa hoa anh đào" action={<button>Khám phá ngay</button>}>
+  Ưu đãi nghỉ dưỡng 2 đêm, kèm bữa sáng Kaiseki và một lượt onsen riêng tư.
+</Banner>
+```
+
+### API
+
+| Prop | Type | Default | Mô tả |
+| --- | --- | --- | --- |
+| `title` | `string` | — | Tiêu đề thông báo. |
+| `eyebrow` | `string` | — | Nhãn nhỏ phía trên tiêu đề. |
+| `children` | `ReactNode` | — | Mô tả hoặc nội dung phụ. |
+| `variant` | `'brand' \| 'forest' \| 'sunrise' \| 'night'` | `'brand'` | Bảng màu của banner. |
+| `action` | `ReactNode` | — | Nút hoặc liên kết thao tác ở bên phải. |
+| `className` | `string` | `''` | Class Tailwind bổ sung. |
+
+### Ghi chú
+
+- Giữ nội dung ngắn, một CTA chính và đặt banner tại vị trí liên quan trong trang.
+- Dùng `Alert` cho lỗi, cảnh báo hoặc phản hồi thao tác.

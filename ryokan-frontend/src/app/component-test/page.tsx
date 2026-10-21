@@ -3,7 +3,11 @@ import { DarkMode } from "../../components";
 
 const components = [
   { href: "/component-test/alert", name: "Alert", description: "Thông báo success, error, warning và info.", icon: "!" },
+  { href: "/component-test/avatar", name: "Avatar", description: "Ảnh đại diện, fallback và trạng thái hiện diện.", icon: "●" },
+  { href: "/component-test/badge", name: "Badge", description: "Nhãn trạng thái với nhiều màu và kiểu dáng.", icon: "•" },
+  { href: "/component-test/banner", name: "Banner", description: "Thông báo nổi bật và hành động cần chú ý.", icon: "▰" },
   { href: "/component-test/card", name: "Card", description: "Khung nội dung, tiêu đề và vùng hành động.", icon: "▣" },
+  { href: "/component-test/carousel", name: "Carousel", description: "Trình chiếu nội dung có điều hướng.", icon: "◫" },
   { href: "/component-test/dark-mode", name: "Dark mode", description: "Chuyển giao diện sáng/tối và lưu tùy chọn.", icon: "◐" },
   { href: "/component-test/loading", name: "Loading", description: "Spinner với các kích thước khác nhau.", icon: "◌" },
   { href: "/component-test/modal", name: "Modal", description: "Hộp thoại tương tác và trạng thái mở/đóng.", icon: "□" },

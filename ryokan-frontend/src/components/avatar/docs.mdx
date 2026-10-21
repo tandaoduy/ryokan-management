@@ -1,0 +1,36 @@
+import { Avatar } from "./Avatar";
+
+## Avatar
+
+Avatar hiển thị ảnh đại diện hoặc chữ cái viết tắt khi ảnh chưa có. Có thể gắn trạng thái hiện diện ở góc dưới phải; giao diện tự tăng độ sáng ở dark mode để không bị chìm.
+
+### Khi sử dụng
+
+- Danh sách khách lưu trú, nhân viên hoặc tài khoản đang đăng nhập.
+- Hoạt động gần đây, bình luận và bảng phân công.
+
+### Ví dụ
+
+```tsx
+<Avatar name="Nguyễn Minh Anh" />
+<Avatar name="Nguyễn Minh Anh" size="lg" status="online" />
+<Avatar name="Nguyễn Minh Anh" shape="rounded" />
+<Avatar src="/staff/minh-anh.jpg" name="Nguyễn Minh Anh" alt="Nguyễn Minh Anh" />
+```
+
+### API
+
+| Prop | Type | Default | Mô tả |
+| --- | --- | --- | --- |
+| `src` | `string` | — | Đường dẫn ảnh đại diện. Khi không có, component dùng `name` làm fallback. |
+| `alt` | `string` | `name` | Nội dung thay thế cho ảnh. |
+| `name` | `string` | — | Tên hiển thị; hai chữ cái đầu được dùng làm fallback. |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Kích thước avatar. |
+| `status` | `'online' \| 'away' \| 'busy' \| 'offline'` | — | Chấm trạng thái ở góc dưới phải. |
+| `shape` | `'circle' \| 'rounded' \| 'square'` | `'circle'` | Kiểu bo góc của avatar. |
+| `className` | `string` | `''` | Class Tailwind bổ sung cho wrapper. |
+
+### Ghi chú
+
+- `src` nên trỏ đến ảnh đã được tối ưu và có tỉ lệ vuông.
+- Không dùng trạng thái nếu thông tin hiện diện không chính xác hoặc không hữu ích cho người dùng.
