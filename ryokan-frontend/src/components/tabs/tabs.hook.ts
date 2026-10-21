@@ -1,0 +1,1 @@
+"use client"; import { useContext } from "react"; import { TabsContext } from "./TabsProvider"; export function useTabs() { const context = useContext(TabsContext); if (!context) throw new Error("useTabs must be used inside TabsProvider."); return context; }

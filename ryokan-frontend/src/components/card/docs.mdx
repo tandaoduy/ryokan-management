@@ -27,6 +27,14 @@ Khung nội dung thống nhất cho dashboard, thông tin phòng, gói nghỉ d�
 <Card variant="interactive" title="Đặt phòng mới">
   Nội dung có thể click hoặc mở chi tiết.
 </Card>
+
+<Card
+  title="Kaiseki theo mùa"
+  media={<div className="h-40 bg-gradient-to-br from-amber-400 to-rose-600" />}
+  mediaPosition="top"
+>
+  <Button size="sm">Xem thực đơn</Button>
+</Card>
 ```
 
 ### API
@@ -38,11 +46,14 @@ Khung nội dung thống nhất cho dashboard, thông tin phòng, gói nghỉ d�
 | `description` | `string` | — | Mô tả dưới tiêu đề. |
 | `actions` | `ReactNode` | — | Nút hoặc nhóm hành động ở góc phải. |
 | `variant` | `'default' \| 'elevated' \| 'outlined' \| 'filled' \| 'interactive'` | `'default'` | Kiểu bề mặt và tương tác của card. |
+| `media` | `ReactNode` | — | Vùng hình ảnh, illustration hoặc nội dung media ở cạnh card. |
+| `mediaPosition` | `'top' \| 'left' \| 'right'` | `'top'` | Vị trí của media; `left` và `right` chuyển thành layout ngang từ màn hình `md`. |
 | `className` | `string` | `''` | Tailwind class bổ sung. |
 
 ### Ghi chú
 
 - Header chỉ hiện khi có `title`, `description` hoặc `actions`.
 - `default` dùng cho nội dung thông thường; `elevated` cho điểm nhấn; `outlined` và `filled` cho vùng nội dung phụ; `interactive` dành cho card có thể mở hoặc click.
+- Dùng `media` cho card có ảnh/CTA, profile hoặc card ngang. Media nên có chiều cao tối thiểu để card cân đối.
 - Dark mode dùng nền slate-900 tách nhẹ khỏi nền trang slate-950, viền slate-700 trong suốt và bóng đổ sâu hơn.
 - Không lồng card nếu không cần thiết về mặt cấu trúc nội dung.

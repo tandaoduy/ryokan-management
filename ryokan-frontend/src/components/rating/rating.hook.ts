@@ -1,0 +1,1 @@
+"use client"; import { useContext } from "react"; import { RatingContext } from "./RatingProvider"; export function useRating() { const context = useContext(RatingContext); if (!context) throw new Error("useRating must be used inside RatingProvider."); return context; }

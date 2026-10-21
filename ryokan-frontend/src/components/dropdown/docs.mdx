@@ -1,9 +1,32 @@
 ## Dropdown
 
-Menu nổi được mở từ trigger tùy biến.
+Menu nổi cao cấp kết hợp thẩm mỹ phong cách Ryokan, hỗ trợ nhiều vị trí placement, kích hoạt theo Click hoặc Hover, phân chia menu, danh mục đa cấp (multi-level), checkbox, radio và toggle switch.
 
 ```tsx
-<Dropdown trigger={<button>Thao tác</button>}><button>Chỉnh sửa</button></Dropdown>
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownHeader,
+  DropdownDivider,
+  DropdownCheckbox,
+  DropdownRadio,
+  DropdownToggle,
+  DropdownSubmenu,
+} from "@/components";
+
+<Dropdown trigger={<button>Tùy chọn ▾</button>}>
+  <DropdownHeader name="Tan Dao Duy" email="tan@ryokan.jp" badge={<span className="text-xs bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded">PRO</span>} />
+  <DropdownItem href="/dashboard">Bảng điều khiển</DropdownItem>
+  <DropdownItem>Cài đặt</DropdownItem>
+  <DropdownDivider />
+  <DropdownItem destructive>Đăng xuất</DropdownItem>
+</Dropdown>
 ```
 
-`align`: `left` hoặc `right`; `variant`: `default` hoặc `minimal`.
+### Các tính năng nâng cao
+
+1. **Trigger theo Hover hoặc Click**: Hỗ trợ `triggerType="hover"` kèm `delay={200}` hoặc click mặc định.
+2. **12 Vị trí Placement**: `top`, `bottom`, `left`, `right`, cùng các biến thể `-start`, `-end`.
+3. **Menu đa cấp (Multi-level Submenu)**: Sử dụng `<DropdownSubmenu>` để lồng các menu con mượt mà.
+4. **Form Inputs trong Menu**: Tích hợp `<DropdownCheckbox>`, `<DropdownRadio>`, và `<DropdownToggle>` với helper text.
+5. **Biến thể giao diện**: `variant="default"`, `variant="minimal"`, và `variant="glass"`.

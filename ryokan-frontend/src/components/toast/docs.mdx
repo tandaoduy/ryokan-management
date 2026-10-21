@@ -1,0 +1,127 @@
+# Toast
+
+Thành phần Toast (thông báo nổi tạm thời) tuân theo tiêu chuẩn **Flowbite Tailwind CSS** kết hợp cùng hệ thống thiết kế Ryokan. Hỗ trợ đầy đủ các trạng thái ngữ cảnh (`success`, `danger`, `warning`, `info`), nút hoàn tác (undo), thông báo tin nhắn kèm ảnh đại diện (avatar & reply CTA), thẻ cập nhật tương tác, thanh tiến trình (progress bar), cảnh báo nguy hiểm/chú ý toàn diện (full alert) và định vị đa vị trí (`top-right`, `bottom-right`, `top-left`, `bottom-left`).
+
+## Nhập thành phần
+
+```tsx
+import { Toast } from "@/components";
+import type { ToastVariant, ToastPosition, ToastProps } from "@/components";
+```
+
+## Các ví dụ sử dụng
+
+### 1. Toast mặc định và Màu sắc trạng thái
+
+```tsx
+<Toast variant="success">Mục đã được di chuyển thành công.</Toast>
+<Toast variant="danger">Đã xóa mục khỏi hệ thống.</Toast>
+<Toast variant="warning">Vui lòng nâng cao độ phức tạp mật khẩu.</Toast>
+<Toast variant="info">Phiên bản mới đã sẵn sàng.</Toast>
+```
+
+### 2. Toast với nút Hoàn tác (Undo Button)
+
+```tsx
+<Toast
+  undoText="Hoàn tác"
+  onUndo={() => alert("Đã hoàn tác thao tác lưu trữ!")}
+>
+  Cuộc trò chuyện đã được lưu trữ.
+</Toast>
+```
+
+### 3. Thông báo tin nhắn kèm Avatar và Nút Trả lời
+
+```tsx
+<Toast
+  avatar="/avatar.png"
+  title="Lan Anh"
+  actionText="Trả lời"
+  onAction={() => alert("Mở khung phản hồi")}
+>
+  Chào bạn, cảm ơn bạn đã gửi phản hồi về dịch vụ Ryokan!
+</Toast>
+```
+
+### 4. Push Notification Toast
+
+```tsx
+<Toast
+  badgeText="Thông báo mới"
+  avatar="/user.jpg"
+  title="Hoàng Nam"
+  timeAgo="vài giây trước"
+  cancelText="Đóng"
+  actionText="Phản hồi"
+  onAction={() => alert("Phản hồi")}
+>
+  vừa bình luận về ảnh kỳ nghỉ của bạn.
+</Toast>
+```
+
+### 5. Toast kèm Thanh tiến trình (Progress Bar)
+
+```tsx
+<Toast
+  variant="info"
+  title="Đang tải tệp lên"
+  progress={75}
+  cancelText="Hủy tải"
+  actionText="Xem tệp"
+  onAction={() => alert("Xem danh sách")}
+>
+  Vui lòng đợi trong giây lát, hệ thống đang đồng bộ dữ liệu.
+</Toast>
+```
+
+### 6. Cảnh báo toàn diện (Full Alert Toast)
+
+```tsx
+<Toast
+  fullAlert
+  variant="danger"
+  title="Rất tiếc! Đã xảy ra lỗi"
+  actionText="Thử lại"
+  cancelText="Đóng"
+  onAction={() => alert("Thử lại")}
+>
+  Định dạng tệp không được hỗ trợ. Vui lòng tải lên định dạng PDF, JPG hoặc PNG.
+</Toast>
+```
+
+### 7. Định vị cố định màn hình (Fixed Positioning)
+
+```tsx
+<Toast
+  position="top-right"
+  variant="success"
+  duration={4000}
+>
+  Thông báo góc trên bên phải, tự động đóng sau 4 giây.
+</Toast>
+```
+
+## Bảng thuộc tính (Props)
+
+| Thuộc tính | Kiểu dữ liệu | Mặc định | Mô tả |
+| :--- | :--- | :--- | :--- |
+| `title` | `string` | - | Tiêu đề thông báo |
+| `children` | `ReactNode` | - | Nội dung chi tiết của Toast |
+| `variant` | `"info" \| "success" \| "warning" \| "danger" \| "default"` | `"info"` | Trạng thái màu sắc ngữ cảnh |
+| `icon` | `ReactNode` | - | Biểu tượng tùy biến ghi đè icon mặc định |
+| `avatar` | `string \| ReactNode` | - | URL ảnh đại diện hoặc component avatar |
+| `dismissible` | `boolean` | `true` | Hiển thị nút đóng (dấu X) |
+| `onDismiss` | `() => void` | - | Callback khi người dùng nhấn nút đóng |
+| `duration` | `number` | - | Thời gian tự động đóng (tính bằng mili-giây) |
+| `position` | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right" \| "top-center" \| "bottom-center"` | - | Vị trí neo cố định trên màn hình |
+| `undoText` | `string` | - | Nhãn cho nút hoàn tác (Undo) |
+| `onUndo` | `() => void` | - | Callback khi người dùng nhấn nút hoàn tác |
+| `actionText` | `string` | - | Nhãn nút hành động chính (Reply, Update,...) |
+| `onAction` | `() => void` | - | Callback khi nhấn nút hành động chính |
+| `cancelText` | `string` | - | Nhãn nút hủy bỏ hoặc từ chối |
+| `onCancel` | `() => void` | - | Callback khi nhấn nút hủy bỏ |
+| `progress` | `number` | - | Phần trăm tiến trình (0 đến 100) |
+| `timeAgo` | `string` | - | Chuỗi thời gian (ví dụ: "vài giây trước") |
+| `badgeText` | `string` | - | Nhãn badge trên đầu (ví dụ: "Thông báo mới") |
+| `fullAlert` | `boolean` | `false` | Hiển thị dưới dạng khung màu cảnh báo khối |

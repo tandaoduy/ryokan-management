@@ -1,0 +1,30 @@
+## Button Group
+
+Ghép các `Button` thành một nhóm liền cạnh theo mẫu Flowbite. Dùng cho các hành động liên quan, toolbar icon hoặc lựa chọn chế độ.
+
+```tsx
+<ButtonGroup ariaLabel="Hành động hồ sơ">
+  <Button appearance="soft">Hồ sơ</Button>
+  <Button appearance="soft">Cài đặt</Button>
+  <Button appearance="soft">Tin nhắn</Button>
+</ButtonGroup>
+```
+
+### Hướng dọc
+
+```tsx
+<ButtonGroup orientation="vertical" ariaLabel="Tác vụ đặt phòng">
+  <Button>Chỉnh sửa</Button>
+  <Button appearance="outline">Sao chép</Button>
+  <Button variant="danger" appearance="soft">Hủy</Button>
+</ButtonGroup>
+```
+
+### API
+
+| Prop | Kiểu | Mặc định | Mô tả |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | — | Các `Button` cần ghép. |
+| `orientation` | `horizontal \| vertical` | `horizontal` | Hướng xếp nhóm. |
+| `ariaLabel` | `string` | `Nhóm nút` | Nhãn trợ năng cho group. |
+| `className` | `string` | `""` | Class bổ sung cho wrapper. |

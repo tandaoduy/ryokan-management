@@ -1,0 +1,1 @@
+"use client"; import { useContext } from "react"; import { PaginationContext } from "./PaginationProvider"; export function usePagination() { const context = useContext(PaginationContext); if (!context) throw new Error("usePagination must be used inside PaginationProvider."); return context; }

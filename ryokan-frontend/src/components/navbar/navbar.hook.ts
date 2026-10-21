@@ -1,0 +1,1 @@
+"use client"; import { useContext } from "react"; import { NavbarContext } from "./NavbarProvider"; export function useNavbar() { const context = useContext(NavbarContext); if (!context) throw new Error("useNavbar must be used inside NavbarProvider."); return context; }

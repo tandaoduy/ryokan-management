@@ -1,0 +1,40 @@
+## Button
+
+Nút hành động theo các mẫu Flowbite: semantic colors, `solid`/`outline`/`soft`/`gradient`, pill, icon, loading, disabled và link button. Tất cả variants có màu tương phản cho light/dark mode.
+
+```tsx
+<Button variant="primary">Lưu thay đổi</Button>
+<Button appearance="outline" variant="danger">Xóa</Button>
+```
+
+### Appearance và màu
+
+`variant` gồm `primary`, `secondary`, `success`, `danger`, `warning`, `dark`, `ghost`. Kết hợp với `appearance` là `solid`, `outline`, `soft` hoặc `gradient`.
+
+```tsx
+<Button appearance="soft" variant="success">Đã xác nhận</Button>
+<Button appearance="gradient" variant="primary">Tạo đặt phòng</Button>
+```
+
+### Icon và trạng thái
+
+Truyền `leftIcon`, `rightIcon`, hoặc `loading`; khi loading, button tự khóa thao tác.
+
+```tsx
+<Button leftIcon={<PlusIcon />}>Thêm phòng</Button>
+<Button loading>Đang lưu</Button>
+<Button disabled>Không khả dụng</Button>
+```
+
+### API
+
+| Prop | Kiểu | Mặc định | Mô tả |
+| --- | --- | --- | --- |
+| `variant` | `ButtonVariant` | `primary` | Màu semantic của button. |
+| `appearance` | `solid \| outline \| soft \| gradient` | `solid` | Kiểu nền và viền. |
+| `size` | `xs \| sm \| md \| lg \| xl` | `md` | Kích thước button. |
+| `pill` | `boolean` | `false` | Bo tròn hoàn toàn. |
+| `fullWidth` | `boolean` | `false` | Chiếm toàn bộ chiều rộng container. |
+| `leftIcon`, `rightIcon` | `ReactNode` | — | Icon trước hoặc sau nội dung. |
+| `loading` | `boolean` | `false` | Hiện spinner và vô hiệu hóa button. |
+| `href` | `string` | — | Render button dưới dạng liên kết. |

@@ -23,23 +23,32 @@ const variantConfig = {
   },
 };
 
-export function Card({ children, className = "", title, description, actions, variant = "default" }: CardProps) {
+export function Card({ children, className = "", title, description, actions, variant = "default", media, mediaPosition = "top" }: CardProps) {
   const currentVariant = variantConfig[variant];
+  const horizontal = media && mediaPosition !== "top";
+  const mediaClass = horizontal
+    ? "min-h-40 shrink-0 overflow-hidden md:w-2/5"
+    : "min-h-40 overflow-hidden";
+  const content = <div className={`min-w-0 flex-1 p-5 ${horizontal ? "md:p-6" : ""}`}>
+    {(title || description || actions) && (
+      <div className={`mb-5 flex items-start justify-between gap-4 border-b pb-4 ${currentVariant.divider}`}>
+        <div className="min-w-0">
+          {title && <h2 className="text-base font-semibold tracking-tight text-slate-900 dark:text-slate-50">{title}</h2>}
+          {description && <p className="mt-1 text-sm leading-5 text-slate-500 dark:text-slate-400">{description}</p>}
+        </div>
+        {actions && <div className="shrink-0">{actions}</div>}
+      </div>
+    )}
+    {children}
+  </div>;
 
   return (
     <section
-      className={`rounded-2xl border p-5 transition-all duration-200 ${currentVariant.container} ${className}`}
+      className={`rounded-2xl border transition-all duration-200 ${media ? "overflow-hidden" : ""} ${horizontal ? "flex flex-col md:flex-row" : ""} ${currentVariant.container} ${className}`}
     >
-      {(title || description || actions) && (
-        <div className={`mb-5 flex items-start justify-between gap-4 border-b pb-4 ${currentVariant.divider}`}>
-          <div className="min-w-0">
-            {title && <h2 className="text-base font-semibold tracking-tight text-slate-900 dark:text-slate-50">{title}</h2>}
-            {description && <p className="mt-1 text-sm leading-5 text-slate-500 dark:text-slate-400">{description}</p>}
-          </div>
-          {actions && <div className="shrink-0">{actions}</div>}
-        </div>
-      )}
-      {children}
+      {media && mediaPosition !== "right" && <div className={mediaClass}>{media}</div>}
+      {content}
+      {media && mediaPosition === "right" && <div className={mediaClass}>{media}</div>}
     </section>
   );
 }

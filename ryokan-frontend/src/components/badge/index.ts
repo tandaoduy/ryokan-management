@@ -1,2 +1,3 @@
 export { Badge } from "./Badge";
-export type { BadgeAppearance, BadgeProps, BadgeVariant } from "./types";
+export { BadgeProvider } from "./BadgeProvider"; export { useBadge } from "./badge.hook";
+export type { BadgeAppearance, BadgeContextValue, BadgeProps, BadgeShape, BadgeSize, BadgeVariant } from "./types";

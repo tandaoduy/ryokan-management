@@ -1,0 +1,118 @@
+# Sidebar
+
+Thành phần thanh điều hướng bên (Sidebar) theo tiêu chuẩn thiết kế Flowbite, hỗ trợ menu phân cấp đa tầng (multi-level accordion), nhóm phân cách nội dung (separator), thẻ ưu đãi/thông báo CTA (call-to-action alert), chế độ thu gọn (compact mode), logo thương hiệu và drawer off-canvas trên thiết bị di động.
+
+## Nhập thành phần
+
+```tsx
+import { Sidebar } from "@/components";
+import type { SidebarItem, SidebarGroup, SidebarCTA } from "@/components";
+```
+
+## Các trường hợp sử dụng chính
+
+### 1. Sidebar mặc định với Icon & Badge
+
+```tsx
+const items: SidebarItem[] = [
+  { label: "Bảng điều khiển", href: "#", icon: <DashboardIcon />, active: true },
+  { label: "Kanban", href: "#", icon: <KanbanIcon />, badge: "Pro", badgeColor: "default" },
+  { label: "Hộp thư", href: "#", icon: <InboxIcon />, badge: "3", badgeColor: "danger" },
+  { label: "Người dùng", href: "#", icon: <UsersIcon /> },
+  { label: "Đăng xuất", href: "#", icon: <LogoutIcon /> },
+];
+
+<Sidebar items={items} brandName="Ryokan Admin" />
+```
+
+### 2. Multi-Level Menu (Menu con dạng Accordion)
+
+Tự động hiển thị mũi tên xoay và mở danh sách các liên kết con khi người dùng nhấp vào mục cha:
+
+```tsx
+const items: SidebarItem[] = [
+  {
+    label: "Thương mại điện tử",
+    icon: <CartIcon />,
+    subItems: [
+      { label: "Sản phẩm", href: "/products", active: true },
+      { label: "Thanh toán", href: "/billing" },
+      { label: "Hóa đơn", href: "/invoices", badge: "Mới" },
+    ],
+  },
+  { label: "Báo cáo", icon: <ReportIcon /> },
+];
+
+<Sidebar items={items} />
+```
+
+### 3. Nhóm phân cách nội dung (Content Separator & Groups)
+
+Sử dụng prop `groups` để phân chia thành nhiều khu vực logic kèm tiêu đề nhóm hoặc đường kẻ phân cách:
+
+```tsx
+const groups: SidebarGroup[] = [
+  {
+    items: [
+      { label: "Tổng quan", icon: <DashboardIcon />, active: true },
+      { label: "Phòng khách sạn", icon: <RoomIcon /> },
+    ],
+  },
+  {
+    separator: true,
+    title: "Hỗ trợ & Tài liệu",
+    items: [
+      { label: "Tài liệu API", icon: <BookIcon /> },
+      { label: "Trung tâm trợ giúp", icon: <HelpIcon /> },
+    ],
+  },
+];
+
+<Sidebar groups={groups} />
+```
+
+### 4. Thẻ CTA Promo / Alert Box ở đáy Sidebar
+
+```tsx
+const cta: SidebarCTA = {
+  title: "Phiên bản Beta",
+  description: "Trải nghiệm giao diện Ryokan v2 mới nhất! Bạn có thể tắt thông báo này bất kỳ lúc nào.",
+  buttonText: "Nâng cấp ngay",
+  onButtonClick: () => alert("Nâng cấp thành công!"),
+};
+
+<Sidebar items={items} cta={cta} />
+```
+
+### 5. Drawer Off-canvas cho Mobile
+
+```tsx
+const [isOpen, setIsOpen] = useState(false);
+
+<>
+  <button onClick={() => setIsOpen(true)}>Mở Sidebar</button>
+  <Sidebar
+    offCanvas
+    isOpen={isOpen}
+    onClose={() => setIsOpen(false)}
+    items={items}
+  />
+</>
+```
+
+## Bảng thuộc tính (Props)
+
+| Thuộc tính | Kiểu dữ liệu | Mặc định | Mô tả |
+| :--- | :--- | :--- | :--- |
+| `items` | `SidebarItem[]` | `[]` | Danh sách các mục điều hướng đơn giản |
+| `groups` | `SidebarGroup[]` | - | Danh sách các nhóm mục kèm tiêu đề và phân cách |
+| `brand` | `ReactNode` | `"Ryokan"` | Phần tử thương hiệu tùy biến ở đầu Sidebar |
+| `brandName` | `string` | - | Tên thương hiệu hiển thị cạnh logo |
+| `brandLogo` | `ReactNode \| string` | - | Logo dạng ảnh URL hoặc component icon |
+| `brandHref` | `string` | `"#"` | Đường dẫn khi nhấn vào thương hiệu |
+| `cta` | `SidebarCTA \| ReactNode` | - | Hộp thoại kêu gọi hành động (CTA) ở đáy Sidebar |
+| `variant` | `"default" \| "compact" \| "dark" \| "glass"` | `"default"` | Biến thể phong cách giao diện |
+| `collapsed` | `boolean` | `false` | Thu gọn thanh sidebar chỉ hiển thị icon |
+| `offCanvas` | `boolean` | `false` | Bật chế độ drawer trượt ra vào với lớp phủ mờ |
+| `isOpen` | `boolean` | - | Trạng thái hiển thị khi dùng `offCanvas` |
+| `onClose` | `() => void` | - | Hàm gọi khi đóng drawer hoặc nhấn nền mờ |

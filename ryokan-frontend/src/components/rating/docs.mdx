@@ -1,0 +1,53 @@
+## Rating (Đánh giá & Điểm số)
+
+Component đánh giá kết hợp thẩm mỹ Ryokan: hỗ trợ đánh giá sao tĩnh hoặc tương tác chọn sao (`interactive`), kích thước sm/md/lg/xl, sao thập phân (nửa sao / partial fill), phân bổ sao nâng cao (`RatingAdvanced`), điểm số theo tiêu chí (`RatingScore`), bình luận đánh giá (`RatingComment`), và thẻ đánh giá chi tiết (`RatingReviewCard`).
+
+### Cài đặt và Import
+
+```tsx
+import {
+  Rating,
+  RatingAdvanced,
+  RatingScore,
+  RatingComment,
+  RatingReviewCard,
+} from "@/components";
+```
+
+### Sử dụng cơ bản
+
+```tsx
+// 1. Đánh giá 5 sao tiêu chuẩn
+<Rating value={4.5} showText />
+
+// 2. Tương tác chọn sao
+<Rating interactive value={3} onChange={(val) => console.log(val)} />
+
+// 3. Hiển thị rút gọn kèm số lượt đánh giá
+<Rating value={4.95} showCount count={73} />
+
+// 4. Phân bổ sao (Advanced rating)
+<RatingAdvanced
+  rating={4.95}
+  totalRatings={1745}
+  distribution={[
+    { stars: 5, percentage: 70 },
+    { stars: 4, percentage: 17 },
+    { stars: 3, percentage: 8 },
+    { stars: 2, percentage: 4 },
+    { stars: 1, percentage: 1 },
+  ]}
+/>
+```
+
+### Bảng Props của `<Rating />`
+
+| Prop | Kiểu dữ liệu | Mặc định | Mô tả |
+| --- | --- | --- | --- |
+| `value` | `number` | `0` | Số sao hiện tại (hỗ trợ số lẻ như 4.5) |
+| `max` | `number` | `5` | Tổng số sao tối đa |
+| `size` | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Kích thước ngôi sao |
+| `interactive` | `boolean` | `false` | Bật chế độ tương tác click và hover chọn sao |
+| `onChange` | `(value: number) => void` | `undefined` | Callback khi người dùng chọn sao |
+| `showText` | `boolean` | `false` | Hiển thị chữ 'X trên Y sao' |
+| `showCount` | `boolean` | `false` | Chế độ gọn: '★ X • Y đánh giá' |

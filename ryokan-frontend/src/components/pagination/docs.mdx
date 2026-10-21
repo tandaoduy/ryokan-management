@@ -1,0 +1,70 @@
+## Pagination (Phân trang)
+
+Component điều hướng phân trang đa phong cách kết hợp thẩm mỹ Ryokan: hỗ trợ chế độ Default connected, Rounded pill, Minimal ghost, Phân trang Table data, Single navigation, Kích thước sm/md/lg, nhảy trang trực tiếp (Jumper), và chọn số mục mỗi trang.
+
+### Cài đặt và Import
+
+```tsx
+import {
+  Pagination,
+  PaginationNavigation,
+  PaginationSingle,
+  PaginationSelectJumper,
+  PaginationTableInfo,
+} from "@/components";
+```
+
+### Các biến thể (Variants)
+
+```tsx
+// 1. Mặc định (Default connected với -space-x-px)
+<Pagination totalPages={10} initialPage={3} />
+
+// 2. Bo tròn tách biệt (Rounded pill/circular)
+<Pagination totalPages={8} variant="rounded" initialPage={1} />
+
+// 3. Trong suốt tối giản (Minimal)
+<Pagination totalPages={6} variant="minimal" initialPage={2} />
+
+// 4. Kèm số lượng bảng (Table data pagination)
+<Pagination
+  totalPages={10}
+  totalItems={100}
+  itemsPerPage={10}
+  layout="table"
+/>
+
+// 5. Rút gọn một cụm (Single pagination)
+<PaginationSingle
+  currentPage={1}
+  totalPages={99}
+  onPageChange={(page) => console.log(page)}
+/>
+
+// 6. Nút Trước / Sau độc lập (Previous / Next navigation)
+<PaginationNavigation
+  currentPage={2}
+  totalPages={10}
+  onPageChange={(page) => console.log(page)}
+  showIcons
+  showText
+/>
+```
+
+### Props chính của `<Pagination />`
+
+| Prop | Kiểu dữ liệu | Mặc định | Mô tả |
+| --- | --- | --- | --- |
+| `totalPages` | `number` | **Bắt buộc** | Tổng số trang |
+| `currentPage` | `number` | `undefined` | Trang hiện tại (chế độ controlled) |
+| `initialPage` | `number` | `1` | Trang bắt đầu (chế độ uncontrolled) |
+| `onPageChange` | `(page: number) => void` | `undefined` | Callback khi chuyển trang |
+| `variant` | `'default' \| 'rounded' \| 'minimal' \| 'table' \| 'single'` | `'default'` | Phong cách hiển thị |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Kích thước (`sm`: 32px, `md`: 36px, `lg`: 40px) |
+| `layout` | `'grouped' \| 'navigation' \| 'table' \| 'dropdown' \| 'input'` | `'grouped'` | Bố cục thành phần |
+| `showIcons` | `boolean` | `true` | Hiển thị icon mũi tên |
+| `showText` | `boolean` | `false` | Hiển thị chữ 'Trước' / 'Sau' |
+| `totalItems` | `number` | `undefined` | Tổng số dòng dữ liệu cho table layout |
+| `itemsPerPage` | `number` | `10` | Số dòng hiển thị mỗi trang |
+| `showPageJumper` | `boolean` | `false` | Bật ô input "Đi đến trang" |
+| `showPageSizeSelector` | `boolean` | `false` | Bật dropdown chọn số dòng / trang |

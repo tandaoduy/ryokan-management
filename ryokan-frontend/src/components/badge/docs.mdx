@@ -2,7 +2,7 @@ import { Badge } from "./Badge";
 
 ## Badge
 
-Badge là nhãn ngắn, gọn để biểu thị trạng thái, phân loại hoặc số lượng. Component hỗ trợ màu semantic và ba kiểu trình bày, phù hợp với cả light/dark mode.
+Badge là nhãn ngắn để biểu thị trạng thái, phân loại hoặc số lượng. Hỗ trợ icon, dot, loader, link và dismiss ở cả light/dark mode.
 
 ### Khi sử dụng
 
@@ -15,6 +15,8 @@ Badge là nhãn ngắn, gọn để biểu thị trạng thái, phân loại ho�
 <Badge variant="success">Đã xác nhận</Badge>
 <Badge variant="warning" appearance="outline">Chờ thanh toán</Badge>
 <Badge variant="danger" appearance="solid">Đã hủy</Badge>
+<Badge dot variant="success">Đang hoạt động</Badge>
+<Badge loading variant="info">Đang đồng bộ</Badge>
 ```
 
 ### API
@@ -24,6 +26,12 @@ Badge là nhãn ngắn, gọn để biểu thị trạng thái, phân loại ho�
 | `children` | `ReactNode` | — | Nội dung ngắn của nhãn. |
 | `variant` | `'neutral' \| 'info' \| 'success' \| 'warning' \| 'danger'` | `'neutral'` | Ý nghĩa và màu trạng thái. |
 | `appearance` | `'soft' \| 'solid' \| 'outline'` | `'soft'` | Cách thể hiện nền/viền. |
+| `size` | `'sm' \| 'md'` | `'md'` | Kích thước badge. |
+| `shape` | `'rounded' \| 'pill'` | `'pill'` | Kiểu bo góc. |
+| `icon` | `ReactNode` | — | Icon ở đầu badge. |
+| `dot` / `loading` | `boolean` | `false` | Chấm trạng thái hoặc loader. |
+| `href` | `string` | — | Render badge dưới dạng link. |
+| `dismissible` | `boolean` | `false` | Hiển thị nút đóng badge. |
 | `className` | `string` | `''` | Class Tailwind bổ sung. |
 
 ### Ghi chú

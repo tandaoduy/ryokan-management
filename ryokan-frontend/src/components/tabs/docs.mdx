@@ -1,0 +1,94 @@
+# Tabs
+
+Thành phần Tabs (tab chuyển đổi nội dung) tuân theo chuẩn đặc tả thiết kế **Flowbite Tailwind CSS** kết hợp cùng hệ thống thiết kế Ryokan. Hỗ trợ đầy đủ các biến thể giao diện: gạch chân (underline), mặc định (default), thẻ bo tròn (pills), dạng hộp (boxed), toàn chiều rộng (full-width), menu dọc (vertical) cùng điều hướng bàn phím chuẩn WAI-ARIA.
+
+## Nhập thành phần
+
+```tsx
+import { Tabs } from "@/components";
+import type { TabItem, TabsVariant, TabsColor } from "@/components";
+```
+
+## Các ví dụ sử dụng
+
+### 1. Tabs có đường gạch chân (Underline Tabs)
+
+Biến thể phổ biến nhất với đường gạch chân active và hiệu ứng chuyển màu khi di chuột:
+
+```tsx
+const tabs: TabItem[] = [
+  { label: "Hồ sơ", content: <p>Nội dung thông tin cá nhân.</p> },
+  { label: "Bảng điều khiển", content: <p>Thống kê số liệu hệ thống.</p> },
+  { label: "Cài đặt", content: <p>Tùy chọn cấu hình tài khoản.</p> },
+  { label: "Liên hệ", content: <p>Thông tin hỗ trợ khách hàng.</p> },
+  { label: "Vô hiệu hóa", disabled: true },
+];
+
+<Tabs tabs={tabs} variant="underline" color="brand" />
+```
+
+### 2. Tabs kèm biểu tượng (Tabs with Icons)
+
+Hỗ trợ biểu tượng SVG đứng trước nhãn tab:
+
+```tsx
+const tabs: TabItem[] = [
+  { label: "Profile", icon: <UserIcon />, content: <ProfilePanel /> },
+  { label: "Dashboard", icon: <DashboardIcon />, content: <DashboardPanel /> },
+  { label: "Settings", icon: <SettingsIcon />, content: <SettingsPanel /> },
+];
+
+<Tabs tabs={tabs} variant="underline" />
+```
+
+### 3. Tabs dạng viên thuốc (Pills Tabs)
+
+Phù hợp cho các danh mục lọc hoặc thanh điều hướng phụ dạng nút bo tròn:
+
+```tsx
+<Tabs tabs={tabs} variant="pills" color="purple" />
+```
+
+### 4. Tabs dọc (Vertical Tabs)
+
+Xếp danh sách tab theo cột đứng bên trái và khung nội dung mở rộng bên phải:
+
+```tsx
+<Tabs tabs={tabs} orientation="vertical" />
+```
+
+### 5. Tabs toàn chiều rộng (Full-width Tabs)
+
+Tự động kéo giãn các tab chia đều 100% chiều ngang kèm dropdown trên thiết bị di động:
+
+```tsx
+<Tabs tabs={tabs} variant="full-width" />
+```
+
+### 6. Tùy biến màu sắc (Active Color Styles)
+
+Hỗ trợ các bảng màu: `"brand"` (xanh chàm), `"purple"` (tím), `"emerald"` (xanh lục), `"amber"` (vàng hổ phách), `"rose"` (hồng đỏ) hoặc truyền chuỗi class tùy biến qua `activeClasses`:
+
+```tsx
+<Tabs
+  tabs={tabs}
+  variant="underline"
+  activeClasses="text-purple-600 border-purple-600 font-bold"
+  inactiveClasses="text-slate-500 hover:text-purple-600"
+/>
+```
+
+## Bảng thuộc tính (Props)
+
+| Thuộc tính | Kiểu dữ liệu | Mặc định | Mô tả |
+| :--- | :--- | :--- | :--- |
+| `tabs` | `TabItem[]` | `[]` | Danh sách các mục tab (nhãn, nội dung, icon, badge, disabled) |
+| `variant` | `"underline" \| "default" \| "pills" \| "boxed" \| "full-width"` | `"underline"` | Phong cách hiển thị của thanh tab |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Hướng sắp xếp danh sách tab |
+| `color` | `"brand" \| "purple" \| "emerald" \| "amber" \| "rose" \| "dark"` | `"brand"` | Tông màu chủ đạo khi tab được chọn |
+| `defaultTabId`| `string` | - | ID của tab được chọn mặc định ban đầu |
+| `activeTabId` | `string` | - | ID của tab được chọn (chế độ Controlled) |
+| `onTabChange` | `(tabId, index) => void` | - | Callback kích hoạt khi người dùng chuyển tab |
+| `fullWidth` | `boolean` | `false` | Chia đều 100% chiều rộng cho các tab |
+| `activeClasses`| `string` | - | Tùy biến toàn bộ Tailwind CSS class cho tab đang chọn |
+| `inactiveClasses`| `string` | - | Tùy biến Tailwind CSS class cho các tab chưa chọn |

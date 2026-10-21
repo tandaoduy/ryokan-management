@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import type { BadgeAppearance, BadgeProps, BadgeVariant } from "./types";
 
 const styles: Record<BadgeAppearance, Record<BadgeVariant, string>> = {
@@ -21,6 +23,10 @@ const styles: Record<BadgeAppearance, Record<BadgeVariant, string>> = {
   },
 };
 
-export function Badge({ children, variant = "neutral", appearance = "soft", className = "" }: BadgeProps) {
-  return <span className={`inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold leading-none ${styles[appearance][variant]} ${className}`}>{children}</span>;
+const sizeStyle = { sm: "px-1.5 py-0.5 text-xs", md: "px-3 py-1.5 text-sm" };
+export function Badge({ children, variant = "neutral", appearance = "soft", size = "md", shape = "pill", icon, dot, loading, href, dismissible, onDismiss, className = "" }: BadgeProps) {
+  const [visible, setVisible] = useState(true); if (!visible) return null;
+  const content = <>{loading ? <span className="size-3 animate-spin rounded-full border-2 border-current border-r-transparent" /> : dot ? <span className="size-1.5 rounded-full bg-current" /> : icon}{children}<>{dismissible && <button type="button" onClick={() => { setVisible(false); onDismiss?.(); }} className="ml-1 rounded-full leading-none opacity-70 hover:opacity-100" aria-label="Xóa badge">×</button>}</></>;
+  const classes = `inline-flex items-center gap-1 font-semibold leading-none ${shape === "pill" ? "rounded-full" : "rounded-md"} ${sizeStyle[size]} ${styles[appearance][variant]} ${href ? "transition hover:brightness-95" : ""} ${className}`;
+  return href ? <a href={href} className={classes}>{content}</a> : <span className={classes}>{content}</span>;
 }

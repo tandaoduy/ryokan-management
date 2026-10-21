@@ -1,0 +1,2 @@
+"use client"; import { createContext, type ReactNode } from "react"; import type { PaginationContextValue, PaginationVariant } from "./types";
+export const PaginationContext = createContext<PaginationContextValue | null>(null); export function PaginationProvider({ children, defaultVariant = "default" }: { children: ReactNode; defaultVariant?: PaginationVariant }) { return <PaginationContext.Provider value={{ defaultVariant }}>{children}</PaginationContext.Provider>; }

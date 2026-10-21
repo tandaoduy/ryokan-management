@@ -300,7 +300,7 @@ const japaneseStyles: Record<
     hankoStamp: "bg-[#2F6647] text-white border border-[#204932] shadow-[0_1px_2px_rgba(47,102,71,0.25)] dark:bg-[#28724B] dark:border-[#4CC27B] dark:shadow-[0_1px_10px_rgba(76,194,123,0.22)]",
     title: "text-[#1C462E] dark:text-[#82E5A7]",
     watermark: "text-[#3D7A58] dark:text-[#6BD497]",
-    closeButton: "text-[#52715F] hover:bg-[#F7FAF8] hover:text-[#1C462E] focus:ring-[#3D7A58] dark:text-[#98B7A4] dark:hover:bg-[#10251C] dark:hover:text-[#D9F3E2] dark:focus:ring-[#4CC27B]",
+    closeButton: "text-[#52715F] hover:bg-black/5 hover:text-[#1C462E] focus:ring-[#3D7A58] dark:text-[#98B7A4] dark:hover:bg-white/10 dark:hover:text-[#D9F3E2] dark:focus:ring-[#4CC27B]",
   },
   error: {
     container: "bg-[#FDF7F7] border-[#E8C5C5] text-[#421A1C] dark:bg-[#2A161B] dark:border-[#74333E] dark:text-[#F9DFE1]",
@@ -308,7 +308,7 @@ const japaneseStyles: Record<
     hankoStamp: "bg-[#A32E35] text-white border border-[#7D2026] shadow-[0_1px_2px_rgba(163,46,53,0.25)] dark:bg-[#A73C4A] dark:border-[#F06A78] dark:shadow-[0_1px_10px_rgba(240,106,120,0.22)]",
     title: "text-[#7D1E24] dark:text-[#FF9CA6]",
     watermark: "text-[#B53B42] dark:text-[#F28A94]",
-    closeButton: "text-[#806265] hover:bg-[#FDF7F7] hover:text-[#7D1E24] focus:ring-[#B53B42] dark:text-[#C29A9E] dark:hover:bg-[#2A161B] dark:hover:text-[#F9DFE1] dark:focus:ring-[#F06A78]",
+    closeButton: "text-[#806265] hover:bg-black/5 hover:text-[#7D1E24] focus:ring-[#B53B42] dark:text-[#C29A9E] dark:hover:bg-white/10 dark:hover:text-[#F9DFE1] dark:focus:ring-[#F06A78]",
   },
   warning: {
     container: "bg-[#FCF9F2] border-[#EADAB2] text-[#4A340C] dark:bg-[#2A2112] dark:border-[#765B26] dark:text-[#F8EBC8]",
@@ -316,7 +316,7 @@ const japaneseStyles: Record<
     hankoStamp: "bg-[#A36D0B] text-white border border-[#7A4F03] shadow-[0_1px_2px_rgba(163,109,11,0.25)] dark:bg-[#A97820] dark:border-[#F0C867] dark:shadow-[0_1px_10px_rgba(240,185,76,0.2)]",
     title: "text-[#6E4602] dark:text-[#FFD57A]",
     watermark: "text-[#BA8218] dark:text-[#EFC76D]",
-    closeButton: "text-[#7A6846] hover:bg-[#FCF9F2] hover:text-[#6E4602] focus:ring-[#BA8218] dark:text-[#C7B889] dark:hover:bg-[#2A2112] dark:hover:text-[#F8EBC8] dark:focus:ring-[#F0B94C]",
+    closeButton: "text-[#7A6846] hover:bg-black/5 hover:text-[#6E4602] focus:ring-[#BA8218] dark:text-[#C7B889] dark:hover:bg-white/10 dark:hover:text-[#F8EBC8] dark:focus:ring-[#F0B94C]",
   },
   info: {
     container: "bg-[#F3F7FA] border-[#C3D9E9] text-[#163045] dark:bg-[#112332] dark:border-[#2B607E] dark:text-[#D6ECFA]",
@@ -324,7 +324,7 @@ const japaneseStyles: Record<
     hankoStamp: "bg-[#215782] text-white border border-[#143B59] shadow-[0_1px_2px_rgba(33,87,130,0.25)] dark:bg-[#236C99] dark:border-[#57B9E8] dark:shadow-[0_1px_10px_rgba(87,185,232,0.22)]",
     title: "text-[#154266] dark:text-[#8DD8FA]",
     watermark: "text-[#2E6896] dark:text-[#75C9ED]",
-    closeButton: "text-[#557080] hover:bg-[#F3F7FA] hover:text-[#154266] focus:ring-[#2E6896] dark:text-[#96B8CA] dark:hover:bg-[#112332] dark:hover:text-[#D6ECFA] dark:focus:ring-[#57B9E8]",
+    closeButton: "text-[#557080] hover:bg-black/5 hover:text-[#154266] focus:ring-[#2E6896] dark:text-[#96B8CA] dark:hover:bg-white/10 dark:hover:text-[#D6ECFA] dark:focus:ring-[#57B9E8]",
   },
 };
 
@@ -396,16 +396,16 @@ export function Alert({
         {action && <div className="mt-2.5 flex items-center gap-2">{action}</div>}
       </div>
 
-      {/* Nút đóng chữ X to rõ, sắc nét, dễ nhìn */}
+      {/* Nút đóng chữ X bo tròn hoàn toàn, nền trong suốt cả light và dark */}
       {closable && (
         <button
           type="button"
           onClick={handleClose}
-          className={`relative z-20 shrink-0 rounded-lg p-1.5 transition-colors focus:outline-none focus:ring-2 ${style.closeButton}`}
+          className={`relative z-20 shrink-0 flex size-9 sm:size-10 items-center justify-center rounded-full bg-transparent transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 active:scale-95 ${style.closeButton}`}
           aria-label="Đóng thông báo"
           title="Đóng"
         >
-          <JapaneseCloseIcon className="size-5" />
+          <JapaneseCloseIcon className="size-5.5 sm:size-6" />
         </button>
       )}
     </div>

@@ -1,0 +1,47 @@
+## Navbar (Thanh điều hướng)
+
+Component thanh điều hướng phía trên trang kết hợp thẩm mỹ Ryokan: hỗ trợ responsive mobile hamburger menu, nút CTA, ô tìm kiếm (Search), Menu người dùng (User profile dropdown), Bộ chọn ngôn ngữ (Language dropdown), Menu đa cấp, Sticky cố định khi cuộn, Submenu cấp 2, và các phong cách Default, Solid, Glassmorphism, Dark mode.
+
+### Cài đặt và Import
+
+```tsx
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarCollapse,
+  NavbarLink,
+  NavbarSubmenu,
+  NavbarToggle,
+} from "@/components";
+```
+
+### Sử dụng cơ bản
+
+```tsx
+const navItems = [
+  { label: "Trang chủ", href: "/", active: true },
+  { label: "Phòng nghỉ", href: "/rooms" },
+  { label: "Dịch vụ Onsen", href: "/onsen" },
+  { label: "Liên hệ", href: "/contact" },
+];
+
+<Navbar
+  brandName="Ryokan Yadori"
+  items={navItems}
+  action={
+    <button className="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-700">
+      Đặt phòng
+    </button>
+  }
+/>
+```
+
+### Các phong cách & Biến thể
+
+- `variant="default"`: Nền trắng sạch sẽ, viền mảnh cao cấp.
+- `variant="glass"`: Hiệu ứng kính mờ `backdrop-blur-xl` hiện đại.
+- `variant="solid"`: Nền màu xám nhẹ đồng nhất.
+- `variant="dark"`: Nền tối sang trọng huyền bí.
+- `sticky`: Cố định trên cùng khi cuộn trang (`sticky top-0 z-30`).
+- `search`: Tích hợp sẵn ô tìm kiếm tiện lợi.
+- `NavbarSubmenu`: Thanh menu cấp 2 ngay bên dưới thanh chính.

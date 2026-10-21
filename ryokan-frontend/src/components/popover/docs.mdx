@@ -1,0 +1,44 @@
+## Popover (Hộp thông tin ngữ cảnh)
+
+Component Popover kết hợp thẩm mỹ Ryokan: hiển thị hộp thông tin mở rộng cạnh phần tử kích hoạt khi click hoặc hover, hỗ trợ mũi tên chỉ hướng (Arrow), 12 vị trí Placement (`top`, `bottom`, `left`, `right`), tiêu đề Header, và các use cases: User profile, Company profile, Image preview, Password strength, Progress status, Description helper.
+
+### Cài đặt và Import
+
+```tsx
+import { Popover } from "@/components";
+```
+
+### Sử dụng cơ bản
+
+```tsx
+// 1. Popover cơ bản kèm tiêu đề và nội dung
+<Popover
+  title="Chi tiết phòng Suite"
+  trigger={<button className="btn">Xem chi tiết</button>}
+>
+  <p>Diện tích 65m², view toàn cảnh núi Phú Sĩ và bồn tắm Hinoki riêng.</p>
+</Popover>
+
+// 2. Kích hoạt khi rê chuột (Hover) với vị trí Top
+<Popover
+  triggerType="hover"
+  placement="top"
+  trigger={<span className="underline cursor-pointer">Ryokan Onsen</span>}
+>
+  <p>Suối khoáng nóng tự nhiên chảy trực tiếp từ mạch nguồn núi lửa.</p>
+</Popover>
+```
+
+### Bảng Props của `<Popover />`
+
+| Prop | Kiểu dữ liệu | Mặc định | Mô tả |
+| --- | --- | --- | --- |
+| `trigger` | `ReactNode \| ((props) => ReactNode)` | **Bắt buộc** | Phần tử kích hoạt mở Popover |
+| `children` / `content` | `ReactNode` | `undefined` | Nội dung bên trong Popover |
+| `title` | `ReactNode` | `undefined` | Tiêu đề Header của Popover |
+| `placement` | `'top' \| 'bottom' \| 'left' \| 'right' \| 'top-start' \| ...` | `'bottom'` | 12 vị trí hiển thị so với trigger |
+| `triggerType` | `'click' \| 'hover'` | `'click'` | Chế độ kích hoạt (Click hoặc Hover) |
+| `showArrow` | `boolean` | `true` | Bật/tắt mũi tên chỉ về phần tử kích hoạt |
+| `width` | `string` | `'w-72'` | Chiều rộng của popover (Tailwind width class) |
+| `delay` | `number` | `150` | Độ trễ mili-giây trước khi đóng khi hover |
+| `offset` | `number` | `8` | Khoảng cách pixel từ trigger đến popover |

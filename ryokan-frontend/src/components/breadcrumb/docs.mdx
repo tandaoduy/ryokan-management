@@ -1,9 +1,34 @@
 ## Breadcrumb
 
-Điều hướng cấp bậc cho các trang sâu trong hệ thống.
+Hiển thị vị trí hiện tại trong cấu trúc điều hướng, với Home icon, separator tùy chỉnh, badge và surface rõ ràng ở light/dark mode.
 
 ```tsx
-<Breadcrumb items={[{ label: "Trang chủ", href: "/" }, { label: "Đặt phòng" }]} />
+<Breadcrumb showHomeIcon items={[{ label: "Trang chủ", href: "/" }, { label: "Đặt phòng", href: "/reservations" }, { label: "RSV-001" }]} />
 ```
 
-`variant`: `default` hoặc `compact`.
+### Variants
+
+`default` trong suốt, `compact` thu nhỏ typography, `pill` bo tròn hoàn toàn và `solid` có nền cùng viền.
+
+```tsx
+<Breadcrumb items={items} variant="solid" showHomeIcon />
+<Breadcrumb items={items} variant="pill" showHomeIcon />
+```
+
+### Separator và item nâng cao
+
+Truyền `separator` để thay chevron. Mỗi `BreadcrumbItem` nhận thêm `icon` hoặc `badge`.
+
+```tsx
+<Breadcrumb separator={<span>/</span>} items={[{ label: "Trang chủ", href: "/" }, { label: "Chờ duyệt", badge: <Badge size="sm">12</Badge> }]} />
+```
+
+### API
+
+| Prop | Kiểu | Mặc định | Mô tả |
+| --- | --- | --- | --- |
+| `items` | `BreadcrumbItem[]` | — | Danh sách cấp điều hướng; item cuối là trang hiện tại. |
+| `variant` | `default \| compact \| pill \| solid` | `default` | Cách trình bày breadcrumb. |
+| `separator` | `ReactNode` | chevron | Ký tự hoặc icon phân cách. |
+| `showHomeIcon` | `boolean` | `false` | Thêm icon Home cho item đầu tiên nếu item chưa có `icon`. |
+| `className` | `string` | `""` | Class bổ sung cho thẻ `nav`. |

@@ -1,0 +1,1 @@
+"use client"; import { useContext } from "react"; import { BadgeContext } from "./BadgeProvider"; export function useBadge() { const context = useContext(BadgeContext); if (!context) throw new Error("useBadge must be used inside BadgeProvider."); return context; }

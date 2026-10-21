@@ -1,0 +1,1 @@
+"use client"; import { useContext } from "react"; import { MegaMenuContext } from "./MegaMenuProvider"; export function useMegaMenu() { const context = useContext(MegaMenuContext); if (!context) throw new Error("useMegaMenu must be used inside MegaMenuProvider."); return context; }

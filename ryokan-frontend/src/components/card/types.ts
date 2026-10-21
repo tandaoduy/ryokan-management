@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 export type CardVariant = "default" | "elevated" | "outlined" | "filled" | "interactive";
+export type CardMediaPosition = "top" | "left" | "right";
 
 export type CardProps = {
   children: ReactNode;
@@ -9,5 +10,7 @@ export type CardProps = {
   description?: string;
   actions?: ReactNode;
   variant?: CardVariant;
+  media?: ReactNode;
+  mediaPosition?: CardMediaPosition;
 };
 export type CardContextValue = { defaultClassName: string };

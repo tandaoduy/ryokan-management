@@ -1,0 +1,1 @@
+"use client"; import { useContext } from "react"; import { SkeletonContext } from "./SkeletonProvider"; export function useSkeleton() { const context = useContext(SkeletonContext); if (!context) throw new Error("useSkeleton must be used inside SkeletonProvider."); return context; }

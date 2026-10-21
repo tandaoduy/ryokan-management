@@ -2,7 +2,7 @@ import { Avatar } from "./Avatar";
 
 ## Avatar
 
-Avatar hiển thị ảnh đại diện hoặc chữ cái viết tắt khi ảnh chưa có. Có thể gắn trạng thái hiện diện ở góc dưới phải; giao diện tự tăng độ sáng ở dark mode để không bị chìm.
+Avatar hiển thị ảnh đại diện, initials hoặc icon fallback. Hỗ trợ ring, tooltip, status dot ở bốn vị trí và khối thông tin `AvatarProfile`.
 
 ### Khi sử dụng
 
@@ -15,6 +15,8 @@ Avatar hiển thị ảnh đại diện hoặc chữ cái viết tắt khi ảnh
 <Avatar name="Nguyễn Minh Anh" />
 <Avatar name="Nguyễn Minh Anh" size="lg" status="online" />
 <Avatar name="Nguyễn Minh Anh" shape="rounded" />
+<Avatar fallback="icon" tooltip="Chưa có ảnh đại diện" />
+<AvatarProfile name="Nguyễn Minh Anh" subtitle="Khách thân thiết" status="online" />
 <Avatar src="/staff/minh-anh.jpg" name="Nguyễn Minh Anh" alt="Nguyễn Minh Anh" />
 ```
 
@@ -28,6 +30,9 @@ Avatar hiển thị ảnh đại diện hoặc chữ cái viết tắt khi ảnh
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Kích thước avatar. |
 | `status` | `'online' \| 'away' \| 'busy' \| 'offline'` | — | Chấm trạng thái ở góc dưới phải. |
 | `shape` | `'circle' \| 'rounded' \| 'square'` | `'circle'` | Kiểu bo góc của avatar. |
+| `fallback` | `'initials' \| 'icon'` | `'initials'` | Kiểu hiển thị khi không có ảnh. |
+| `bordered` | `boolean` | `false` | Thêm ring viền quanh avatar. |
+| `tooltip` | `string` | — | Nội dung hiển thị khi hover. |
 | `className` | `string` | `''` | Class Tailwind bổ sung cho wrapper. |
 
 ### Ghi chú

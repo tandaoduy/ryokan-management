@@ -1,0 +1,51 @@
+## Mega Menu (Menu đa cấp kích thước lớn)
+
+Component Mega Menu mở rộng theo chuẩn Flowbite kết hợp thẩm mỹ Ryokan: hỗ trợ dạng thả xuống cục bộ (`variant="dropdown"`) và dạng trải rộng toàn trang (`variant="full-width"`), danh sách liên kết có icon + mô tả, khối kêu gọi hành động (CTA), và thẻ bài viết kèm hình ảnh nền.
+
+### Cài đặt và Import
+
+```tsx
+import {
+  MegaMenu,
+  MegaMenuItemLink,
+  MegaMenuCTABlock,
+} from "@/components";
+```
+
+### Sử dụng cơ bản
+
+```tsx
+const columns = [
+  {
+    title: "Phòng nghỉ",
+    items: [
+      { title: "Sakura Suite", description: "View ngắm núi Phú Sĩ", href: "#" },
+      { title: "Momiji Villa", description: "Khu vườn thiền riêng", href: "#" },
+    ],
+  },
+  {
+    title: "Dịch vụ Onsen",
+    items: [
+      { title: "Rotenburo", description: "Bể tắm khoáng nóng ngoài trời" },
+      { title: "Liệu trình Shiatsu", description: "Massage phục hồi sức khỏe" },
+    ],
+  },
+];
+
+<MegaMenu
+  label="Khám phá Ryokan"
+  columns={columns}
+  cta={{
+    title: "Ưu đãi mùa thu",
+    description: "Giảm 25% cho kỳ nghỉ từ 3 đêm trở lên",
+    buttonText: "Xem gói ưu đãi",
+    buttonHref: "/deals",
+  }}
+/>
+```
+
+### Các biến thể (Variants)
+- `variant="dropdown"`: Hộp menu nổi rộng 3 - 4 cột căn lề dưới nút bấm.
+- `variant="full-width"`: Menu trải rộng 100% bề ngang thanh Navbar.
+- Hỗ trợ `icon`, `description`, `badge` cho từng mục con.
+- Hỗ trợ khối `cta` dạng thẻ gradient hoặc thẻ ảnh nền (`backgroundImage`).

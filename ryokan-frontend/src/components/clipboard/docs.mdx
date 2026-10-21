@@ -1,9 +1,32 @@
 ## Clipboard
 
-Nút sao chép giá trị vào clipboard, có phản hồi sau khi hoàn tất.
+Sao chép mã, URL, lệnh cài đặt hoặc đoạn code với trạng thái thành công rõ ràng. Hỗ trợ button text, icon-only, input group và code block.
 
 ```tsx
-<Clipboard value="RSV-2026-001" variant="outline" />
+<Clipboard value="RSV-2026-001" label="Sao chép mã đặt phòng" />
+<Clipboard value="RSV-2026-001" variant="outline" iconOnly title="Sao chép mã" />
 ```
 
-`variant`: `default`, `outline` hoặc `ghost`.
+### Input group
+
+`ClipboardField` hiển thị giá trị readonly và nút copy dính liền ở cạnh phải.
+
+```tsx
+<ClipboardField
+  label="Lệnh cài đặt"
+  value="npm install @ryokan/ui"
+  copyLabel="Copy"
+  helperText="Dán lệnh này vào terminal để bắt đầu."
+/>
+```
+
+### API
+
+| Prop | Kiểu | Mặc định | Mô tả |
+| --- | --- | --- | --- |
+| `value` | `string` | — | Nội dung cần sao chép. |
+| `label`, `copiedLabel` | `string` | `Sao chép`, `Đã sao chép` | Nhãn trước/sau khi copy. |
+| `variant` | `default \| outline \| ghost` | `default` | Kiểu trình bày button. |
+| `size` | `sm \| md` | `md` | Kích thước button. |
+| `showIcon`, `iconOnly` | `boolean` | `true`, `false` | Điều khiển icon copy và button chỉ icon. |
+| `onCopy`, `onError` | callback | — | Callback khi copy thành công hoặc thất bại. |
