@@ -1,11 +1,20 @@
 ## Forms
 
-Các field dùng lại: `TextField`, `Textarea`, `Select`, `Checkbox`.
+Các field dùng lại: `InputField` (tương thích ngược qua `TextField`), `SearchInput`, `NumberInput`, `PhoneInput`, `Select`, `Textarea`, `TimePicker`, `Checkbox`, `Radio` và `Toggle`.
 
 ```tsx
-<TextField label="Email" type="email" error="Email không hợp lệ." />
+<InputField label="Email" type="email" error="Email không hợp lệ." />
+<SearchInput label="Tìm phòng" />
+<NumberInput label="Số khách" min={1} />
+<PhoneInput label="Số điện thoại" />
 <Select label="Phòng"><option>Fuji Suite</option></Select>
+<Textarea label="Yêu cầu đặc biệt" />
+<TimePicker label="Giờ nhận phòng" />
 <Checkbox label="Gửi email xác nhận" />
+<Radio name="payment" label="Thanh toán tại nơi lưu trú" />
+<Toggle label="Nhận ưu đãi" />
 ```
 
-TextField, Textarea và Select hỗ trợ `variant`: `default` hoặc `filled`, cùng `hint` và `error`.
+Mọi field nhập liệu hỗ trợ `variant="default" | "filled" | "underline"`, kích thước `size="sm" | "md" | "lg"`, cùng `hint` và `error`.
+
+`Checkbox`, `Radio` và `Toggle` hỗ trợ `variant="default" | "card"`; `Toggle` có thêm `size="sm" | "md" | "lg"`.
